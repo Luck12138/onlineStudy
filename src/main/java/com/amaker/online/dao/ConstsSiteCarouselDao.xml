@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.ConstsSiteCarouselDao">
+
+    <sql id="All_Columns">
+        name, picture, url, weight, enable, create_time, create_user,
+        update_time, update_user, del, id
+    </sql>
+
+    <select id="selectCarouseList" parameterType="java.lang.Integer" resultType="com.amaker.online.model.ConstsSiteCarousel">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_consts_site_carousel
+        ORDER BY weight desc
+        LIMIT 0,#{count}
+    </select>
+</mapper>

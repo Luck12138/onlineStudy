@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.CourseDao">
+
+
+    <sql id="All_Columns">
+        name, type, classify, classify_name, sub_classify, sub_classify_name, direction, username,
+        level, free, price, time, onsale, brief, picture,
+        recommend, weight, study_count, create_time, create_user, update_time,
+        update_user, del, id
+    </sql>
+
+    <select id="queryCourseByTo" parameterType="com.amaker.online.model.CourseQueryDto" resultType="com.amaker.online.model.Course">
+       SELECT
+        <include refid="All_Columns"/>
+        From t_course
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify, jdbcType=INTEGER}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="direction != null">
+                AND direction = #{direction, jdbcType=INTEGER}
+            </if>
+            <if test="username != null">
+                AND username = #{username, jdbcType=INTEGER}
+            </if>
+            <if test="free != null">
+                AND free = #{free, jdbcType=INTEGER}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale, jdbcType=INTEGER}
+            </if>
+        </trim>
+        <if test="sortField != null">
+            ORDER BY ${sortField}  ${sortDirection}
+        </if>
+        <if test="start != null and end != null">
+            LIMIT #{start, jdbcType=INTEGER} , #{end, jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

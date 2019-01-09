@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.amaker.online.dao.AuthUserDao">
+
+    <sql id="All_Columns">
+        realname, username, password, gender, header, mobile,
+        status, birthday, education, college_code, college_name, cert_no, title, sign,
+        open_id, wechat_id, qq, login_time, ip, province,
+        city, district, weight, create_time, create_user, update_time, update_user,
+        del, id
+    </sql>
+
+
+
+
+    <select id="selectUserById" parameterType="java.lang.Integer" resultType="com.amaker.online.model.AuthUser">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_auth_user
+        WHERE id=#{id}
+    </select>
+
+    <update id="updateUser" parameterType="com.amaker.online.model.AuthUser">
+        UPDATE t_auth_user
+        SET realname=#{realname}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        DELETE
+        FROM t_auth_user
+        WHERE id=#{id}
+    </delete>
+
+    <select id="selectUserByPage" resultType="com.amaker.online.model.AuthUser">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_auth_user
+        <where>
+            <if test="param1.username!=null">
+                username like "%"#{param1.username}"%"
+            </if>
+            <if test="param1.status!=null">
+                AND status=#{param1.status}
+            </if>
+        </where>
+        ORDER BY id
+        LIMIT #{param2.startIndex},#{param2.pageSize}
+    </select>
+
+    <select id="getCountByUser" parameterType="com.amaker.online.model.AuthUser" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_auth_user
+        <where>
+            <if test="username!=null">
+                username like "%"#{username}"%"
+            </if>
+            <if test="status!=null">
+                AND status=#{status}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getByUsername" parameterType="java.lang.String"  resultType="com.amaker.online.model.AuthUser">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM t_auth_user
+        WHERE username = #{username, jdbcType=VARCHAR}
+        AND DEL = 0
+    </select>
+
+    <insert id="addUser" parameterType="com.amaker.online.model.AuthUser" flushCache="true"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_auth_user
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="realname != null ">
+                realname,
+            </if>
+            <if test="username != null ">
+                username,
+            </if>
+            <if test="password != null ">
+                password,
+            </if>
+            <if test="gender != null ">
+                gender,
+            </if>
+            <if test="header != null ">
+                header,
+            </if>
+            <if test="mobile != null ">
+                mobile,
+            </if>
+            <if test="status != null ">
+                status,
+            </if>
+            <if test="birthday != null ">
+                birthday,
+            </if>
+            <if test="education != null ">
+                education,
+            </if>
+            <if test="collegeCode != null ">
+                college_code,
+            </if>
+            <if test="collegeName != null ">
+                college_name,
+            </if>
+            <if test="certNo != null ">
+                cert_no,
+            </if>
+            <if test="title != null ">
+                title,
+            </if>
+            <if test="sign != null ">
+                sign,
+            </if>
+            <if test="openId != null ">
+                open_id,
+            </if>
+            <if test="wechatId != null ">
+                wechat_id,
+            </if>
+            <if test="qq != null ">
+                qq,
+            </if>
+            <if test="loginTime != null ">
+                login_time,
+            </if>
+            <if test="ip != null ">
+                ip,
+            </if>
+            <if test="province != null ">
+                province,
+            </if>
+            <if test="city != null ">
+                CITY,
+            </if>
+            <if test="district != null ">
+                district,
+            </if>
+            <if test="weight != null ">
+                weight,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="realname != null ">
+                #{realname, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+                #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null ">
+                #{password, jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null ">
+                #{gender, jdbcType=INTEGER},
+            </if>
+            <if test="header != null ">
+                #{header, jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null ">
+                #{mobile, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null ">
+                #{status, jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null ">
+                #{birthday, jdbcType=DATE},
+            </if>
+            <if test="education != null ">
+                #{education, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeCode != null ">
+                #{collegeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null ">
+                #{collegeName, jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null ">
+                #{certNo, jdbcType=VARCHAR},
+            </if>
+            <if test="title != null ">
+                #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null ">
+                #{sign, jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null ">
+                #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null ">
+                #{wechatId, jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null ">
+                #{qq, jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null ">
+                #{loginTime, jdbcType=DATE},
+            </if>
+            <if test="ip != null ">
+                #{ip, jdbcType=VARCHAR},
+            </if>
+            <if test="province != null ">
+                #{province, jdbcType=VARCHAR},
+            </if>
+            <if test="city != null ">
+                #{city, jdbcType=VARCHAR},
+            </if>
+            <if test="district != null ">
+                #{district, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+                #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+</mapper>

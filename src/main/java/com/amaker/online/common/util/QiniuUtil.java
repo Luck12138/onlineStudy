@@ -1,4 +1,4 @@
-package com.amaker.online.util;
+package com.amaker.online.common.util;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

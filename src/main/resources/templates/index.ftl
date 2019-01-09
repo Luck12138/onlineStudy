@@ -22,6 +22,61 @@
 		<script type="text/javascript">
 		CONETXT_PATH = '';
 		</script>
+        <script type="text/javascript">
+            function login(){
+                $('#loginTitle').css('color','#337Ab7');
+                $('#loginForm').show();
+                $('#registeTitle').css('color','#000');
+                $('#registeForm').hide();
+            }
+            function registe(){
+                $('#loginTitle').css('color','#000');
+                $('#loginForm').hide();
+                $('#registeTitle').css('color','#337Ab7');
+                $('#registeForm').show();
+            }
+            $(function(){
+                $("#userdetail").popover({
+                    trigger:'manual',
+                    placement : 'bottom',
+                    html: 'true',
+                    content : '<div style="width:300px;height:300px;"></div>',
+                    animation: false
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(this).siblings(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide")
+                        }
+                    }, 0);
+                });
+                //课程分类展示
+                $(".category").popover({
+                    trigger:'manual',
+                    placement : 'right',
+                    html: 'true',
+                    content : '',
+                    animation: false
+                }).on("mouseenter", function () {
+                    var cid = $(this).attr('c-id');
+                    $('#' + cid).show();
+                    $('#' + cid).hover(function(){
+                        $('#' + cid).show();
+                    },function(){
+                        $('#' + cid).hide();
+                    });
+                }).on("mouseleave", function () {
+                    var cid = $(this).attr('c-id');
+                    $('#' + cid).hide();
+                });
+            });
+        </script>
 	</head>
 
 	<body>
@@ -43,61 +98,6 @@
 				</nav>
 			</div>
 		</div>
-		<script type="text/javascript">
-			function login(){
-				$('#loginTitle').css('color','#337Ab7');
-				$('#loginForm').show();
-				$('#registeTitle').css('color','#000');
-				$('#registeForm').hide();
-			}
-			function registe(){
-				$('#loginTitle').css('color','#000');
-				$('#loginForm').hide();
-				$('#registeTitle').css('color','#337Ab7');
-				$('#registeForm').show();
-			}
-			$(function(){
-				$("#userdetail").popover({
-		            trigger:'manual',
-		            placement : 'bottom',
-		            html: 'true',
-		            content : '<div style="width:300px;height:300px;"></div>',
-		            animation: false
-		        }).on("mouseenter", function () {
-		            var _this = this;
-		            $(this).popover("show");
-		            $(this).siblings(".popover").on("mouseleave", function () {
-		                $(_this).popover('hide');
-		            });
-		        }).on("mouseleave", function () {
-		            var _this = this;
-		            setTimeout(function () {
-		                if (!$(".popover:hover").length) {
-		                    $(_this).popover("hide")
-		                }
-		            }, 0);
-		        });
-				//课程分类展示 
-				$(".category").popover({
-		            trigger:'manual',
-		            placement : 'right',
-		            html: 'true',
-		            content : '',
-		            animation: false
-		        }).on("mouseenter", function () {
-		            var cid = $(this).attr('c-id');
-		            $('#' + cid).show();
-		            $('#' + cid).hover(function(){
-		            	$('#' + cid).show();
-		            },function(){
-		            	$('#' + cid).hide();
-					});
-		        }).on("mouseleave", function () {
-		            var cid = $(this).attr('c-id');
-		            $('#' + cid).hide();
-		        });
-			});
-		</script>
 		<!-- 头部-end -->
 		
 		<!-- 登录注册-start -->
@@ -158,75 +158,74 @@
 			<div class="clearfix">
 				<div class=main-category>
 					<div class="main-bg">
-						<div class="main-bg-item " style="background-image: url('/i/c1.jpg'); ">
-							<div class="main-title-1"></div>
+						<#if carouseList?? && carouseList?size gt 0>
+						<#list carouseList as carouse>
+                         <a href="${carouse.url}">
+						<div class="main-bg-item " style="background-image: url('${carouse.picture}'); ">
 						</div>
-		
-						<div class="main-bg-item " style="background-image: url('/i/c2.jpg'); ">
-							<div class="main-title-2"></div>
-						</div>
-		
-						<div class="main-bg-item " style="background-image: url('/i/c3.jpg'); ">
-							<div class="main-title-3"></div>
-						</div>
+                         </a>
+                        </#list>
+						</#if>
 					</div>
-		
-					<div class="f-nav-box">
-						<div class="bg-nav">
-							<a class="cur"></a> <a></a> <a></a>
-						</div>
-					</div>
+
+                <div class="f-nav-box">
+                    <div class="bg-nav">
+							<#if carouseList?? && carouseList?size gt 0>
+							<#list carouseList as carouse>
+								<#if carouse_index == 0>
+								<a class="cur"></a>
+								<#else>
+								<a></a>
+								</#if>
+							</#list>
+							</#if>
+                    </div>
+                </div>
 					
 					<div class="main-category-menu">
-						<div class="category" c-id="a">
-							<a><div class="group">数据开发 </div></a>
+						<#if classifyVo??>
+						<#list  classifyVo as classify>
+                        <#if classify_index lt 6>
+						<div class="category" c-id="classify_${classify.id}">
+							<a><div class="group">${classify.name}</div></a>
 						</div>
-						
-						<div class="category" c-id="b">
-							<a><div class="group">移动开发</div></a>
-						</div>
-						
-						<div class="category" c-id="c">
-							<a><div class="group">后端开发</div></a>
-						</div>
-						
-						<div class="category" c-id="d">
-							<a><div class="group">数据库</div></a>
-						</div>
-						
-						<div class="category" c-id="e">
-							<a><div class="group">运维&测试</div></a>
-						</div>
-						
-						<div class="category" c-id="f">
-							<a><div class="group">UI设计</div></a>
-						</div>
+						</#if>
+						</#list>
+						</#if>
 					</div>
-										
-					<div class="main-category-submenu-content"  id="a" >
-						AAAAAAAAAA
+                    <#if classifyVo??>
+		            <#list  classifyVo as classify>
+					<#if classify_index lt 6>
+					<div class="main-category-submenu-content"  id="classify_${classify.id}" >
+                        <div class="clearfix" >
+                            <div class="submenu-title clearfix">分类目录</div>
+							<#if classify.subClassifyList??>
+								<#list classify.subClassifyList as subItem>
+								<a class="submenu-item" href="/course/list?c=${subItem.code!}">${subItem.name!}</a>
+									<#if subItem_index lt (classify.subClassifyList?size - 1)>
+								<a class="submenu-item">/</a>
+									</#if>
+								</#list>
+							</#if>
+                        </div>
+
+                        <div class="clearfix" >
+                            <div class="submenu-title" style="margin-top: 30px;">课程推荐</div>
+                            <div>
+								<#if classify.recomdCourseList?? && classify.recomdCourseList?size gt 0 >
+								<#list classify.recomdCourseList as item>
+								<a href="/course/learn/${item.id}.html" class="mt-10" title="${classify.name!}"><li class="ellipsis oc-color-hover">➤ ${item.name!}</li></a>
+								</#list>
+								</#if>
+                            </div>
+                        </div>
+
 					</div>
+					</#if>
+					</#list>
+				    </#if>
 					
-					<div class="main-category-submenu-content"  id="b" >
-						BBBBBBBBBBBB
-					</div>
-					
-					<div class="main-category-submenu-content"  id="c" >
-						CCCCCCCCCCCC
-					</div>
-					
-					<div class="main-category-submenu-content"  id="d" >
-						DDDDDDDDDDDDDD
-					</div>
-					
-					<div class="main-category-submenu-content"  id="e" >
-						EEEEEEEEE
-					</div>
-					
-					<div class="main-category-submenu-content"  id="f" >
-						FFFFFFFFFF
-					</div>
-					
+
 				</div>
 			</div>
 			<!-- 轮播 分类-end -->
@@ -586,33 +585,39 @@
 		<!-- 页脚-end-->
 		
 	</body>
-	
-	<script>
-	$(function(){
-		var index = 0;
-		var timer = 4000;
-		$('.bg-nav a').click(function(){
-			index = $('.bg-nav a').index($(this));
-			rollBg(index);
-		});
-		$('.index-roll-item').click(function(){
-			index = $('.index-roll-item').index($(this));
-			rollBg(index);
-		});
-		var rollBg = function(i){
-			$('.main-bg-item').fadeOut(1000);
-			$($('.main-bg-item')[i]).fadeIn(1000);
-			$('.bg-nav a').removeClass('cur');
-			$($('.bg-nav a')[i]).addClass('cur');
-			$('.index-roll-item').removeClass('cur');
-			$($('.index-roll-item')[i]).addClass('cur');
-		}
-		setInterval(function(){
-			index += 1;
-			index = index%3;
-			rollBg(index);
-		}, timer);
-		
-	});
-	</script>
+
+    <script>
+
+		<#if carouseList?? && carouseList?size gt 0>
+		var size = Number('${carouseList?size}');
+		<#else>
+		var size = 0;
+		</#if>
+        $(function(){
+            var index = 0;
+            var timer = 4000;
+            $('.bg-nav a').click(function(){
+                index = $('.bg-nav a').index($(this));
+                rollBg(index);
+            });
+            $('.index-roll-item').click(function(){
+                index = $('.index-roll-item').index($(this));
+                rollBg(index);
+            });
+            var rollBg = function(i){
+                $('.main-bg-item').fadeOut(1000);
+                $($('.main-bg-item')[i]).fadeIn(1000);
+                $('.bg-nav a').removeClass('cur');
+                $($('.bg-nav a')[i]).addClass('cur');
+                $('.index-roll-item').removeClass('cur');
+                $($('.index-roll-item')[i]).addClass('cur');
+            }
+            setInterval(function(){
+                index += 1;
+                index = index%size;
+                rollBg(index);
+            }, timer);
+
+        });
+    </script>
 </html>

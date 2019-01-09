@@ -40,12 +40,7 @@
 			var username = $('#username').val();
 			var password = $('#password').val();
 			
-			//验证用户名 
-			if(!oc.enNumValid(username)){
-				$('#errorMsg').show();
-				$('#errorMsg').html("用户名只能为英文或数字");
-				return;
-			}
+
 			
 			//验证密码
 			if(oc.isEmpty(password) || password.length < 6){
@@ -53,14 +48,7 @@
 				$('#errorMsg').html("密码至少6位");
 				return;
 			}
-			
-			//验证码不能为空
-			var code = $('#identiryCode').val();
-			if(oc.isEmpty(code)){
-				$('#errorMsg').show();
-				$('#errorMsg').html("请输入验证码");
-				return;
-			}
+
 			
 			//提交注册
 			$('#registerForm').ajaxSubmit({
