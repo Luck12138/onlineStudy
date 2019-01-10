@@ -86,9 +86,9 @@
 				<a href=".." class="logo" title="网校在线学习平台"></a>
 				<nav class="header-nav">
 					<a href=".." class="header-nav-item">首 页</a>
-					<a href="../course/list.html" class="header-nav-item">课 程</a>
-					<a href="pages/user/home.html" class="header-nav-item">我的</a>
-					<a href="../opt/index.html"  style="width:100px;" target="_blank" class="header-nav-item">运营CMS</a>
+					<a href="/course/list" class="header-nav-item">课 程</a>
+					<a href="/pages/user/home" class="header-nav-item">我的</a>
+					<a href="/opt/index"  style="width:100px;" target="_blank" class="header-nav-item">运营CMS</a>
 				</nav>
 				
 				<nav class="header-nav" style="float:right">
@@ -214,7 +214,7 @@
                             <div>
 								<#if classify.recomdCourseList?? && classify.recomdCourseList?size gt 0 >
 								<#list classify.recomdCourseList as item>
-								<a href="/course/learn/${item.id}.html" class="mt-10" title="${classify.name!}"><li class="ellipsis oc-color-hover">➤ ${item.name!}</li></a>
+								<a href="/course/learn/${item.id}" class="mt-10" title="${classify.name!}"><li class="ellipsis oc-color-hover">➤ ${item.name!}</li></a>
 								</#list>
 								</#if>
                             </div>
@@ -234,92 +234,43 @@
 			<div class="types-block clearfix">
 				<h3 class="types-title">实战推荐</h3>
 				<div class="types-content">
-					
-					<a href="">
-					<div class="course-card-container">
-						<div class="course-card-top green-bg">
-							<span>测试</span>
+					<#if actionCourseList?? && actionCourseList?size gt 0>
+                    <#list actionCourseList as item>
+                    <#assign n=item_index+1/>
+
+					<a href="/course/learn/${item.id}" target="_black">
+					<div class="course-card-container"<#if n %5 == 0> style="margin-right: 0px;" </#if> >
+                            <#if item.picture??>
+                            <div class="course-card-top" style="background-image: url(${item.picture})">
+                            <#else>
+                                    <#if n %5 == 0>
+							<div class="course-card-top green-bg">
+                                    <#elseif n %4 == 0>
+							<div class="course-card-top pink-bg">
+                                    <#elseif n %3 == 0>
+							<div class="course-card-top purple-bg">
+                                    <#elseif n %2 == 0>
+							<div class="course-card-top gray-bg">
+                                    <#else>
+							<div class="course-card-top brown-bg">
+                                    </#if>
+                            </#if>
+
+							<span>${item.subClassifyName}</span>
 						</div>
 
 						<div class="course-card-content">
-							<h3 class="course-card-name">Android自动化测试实战 工具 框架 脚本</h3>
-							<p title="找Android自动化测试工作必学的主流工具、框架和自动化脚本">找Android自动化测试工作必学的主流工具、框架和自动化脚本</p>
+                            <h3 class="course-card-name"  title="${item.name!}">${item.name!}</h3>
+                            <p class="course-card-brief" title="${item.brief!}">${item.brief!}</p>
 							<div class="course-card-bottom">
-								<div class="course-card-info">178人在学</div>
-								<div class="course-card-price">￥179.00</div>
+								<div class="course-card-info">${item.studyCount}人在学</div>
+								<div class="course-card-price">￥${item.price}</div>
 							</div>
 						</div>
 					</div>
 					</a>
-
-					<a href="">
-					<div class="course-card-container">
-						<div class="course-card-top pink-bg">
-							<span>WebApp</span>
-						</div>
-						<div class="course-card-content">
-							<h3 class="course-card-name">AngularJS仿拉勾网WebApp 开发移动端单页应用</h3>
-							<p title="基于AngularJS，仿拉勾网开发一个招聘类的移动端单页应用">基于AngularJS，仿拉勾网开发一个招聘类的移动端单页应用</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">344人在学</div>
-	
-								<div class="course-card-price">￥99.00</div>
-							</div>
-						</div>
-					</div>
-					</a>
-					
-					<a href="">
-					<div class="course-card-container">
-						<div class="course-card-top brown-bg">
-							<span>Django</span>
-						</div>
-	
-						<div class="course-card-content">
-							<h3 class="course-card-name">强力django杀手级xadmin 打造上线标准的在线教育平台</h3>
-							<p title="全面掌握django框架,轻松应对python web开发工作">全面掌握django框架,轻松应对python web开发工作</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">488人在学</div>
-								<div class="course-card-price">￥369.00</div>
-							</div>
-						</div>
-					</div>
-					</a>
-	
-					<a href="">
-					<div class="course-card-container">
-						<div class="course-card-top purple-bg">
-							<span>Python</span>
-						</div>
-	
-						<div class="course-card-content">
-							<h3 class="course-card-name">Python高级编程技巧实战</h3>
-							<p title="精选50个python训练任务，提升实战技能与高效编程技巧">精选50个python训练任务，提升实战技能与高效编程技巧</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">813人在学</div>
-								<div class="course-card-price">￥168.00</div>
-							</div>
-						</div>
-					</div>
-					</a>
-					
-					<a href="">
-					<div class="course-card-container" style="margin-right: 0px;">
-						<div class="course-card-top green-bg">
-							<span>PHP</span>
-						</div>
-						
-						<div class="course-card-content">
-							<h3 class="course-card-name">前端后台ThinkPHP开发整站</h3>
-							<p title="用PHP+MySQL+Ajax开完新闻资讯整站，实现“小全栈”的梦想">用PHP+MySQL+Ajax开完新闻资讯整站，实现“小全栈”的梦想</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">2324人在学</div>
-								<div class="course-card-price">￥128.00</div>
-							</div>
-						</div>
-					</div>
-					</a>
-					
+                    </#list>
+                    </#if>
 				</div>
 			</div>
 			<!-- 实战推荐-end -->
@@ -328,79 +279,44 @@
 			<div class="types-block clearfix">
 				<h3 class="types-title">免费好课</h3>
 				<div class="types-content">
-					<a href="">
-					<div class="course-card-container">
-						<div class="course-card-top green-bg">
-							<span>测试</span>
+                    <#if freeCourseList?? && freeCourseList?size gt 0>
+                    <#list freeCourseList as item>
+                    <#assign n=item_index+1/>
+                    <a href="/course/learn/${item.id}" target="_black">
+					<div class="course-card-container" <#if n %5 == 0>style="margin-right: 0px;" </#if>>
+						<#if n %5 == 0>
+							<div class="course-card-top green-bg">
+                        <#elseif n %4 == 0>
+							<div class="course-card-top pink-bg">
+                        <#elseif n %3 == 0>
+							<div class="course-card-top purple-bg">
+                        <#elseif n %2 == 0>
+							<div class="course-card-top gray-bg">
+                        <#else>
+							<div class="course-card-top brown-bg">
+                        </#if>
+							<span>${item.subClassifyName}</span>
 						</div>
 
 						<div class="course-card-content">
-							<h3 class="course-card-name">Android自动化测试实战 工具 框架 脚本</h3>
-							<p title="找Android自动化测试工作必学的主流工具、框架和自动化脚本">找Android自动化测试工作必学的主流工具、框架和自动化脚本</p>
+                        <h3 class="course-card-name"  title="${item.name!}">${item.name!}</h3>
+                        <p class="course-card-brief" title="${item.brief!}">${item.brief!}</p>
 							<div class="course-card-bottom">
-								<div class="course-card-info">初级<span>·</span>178人在学</div>
+								<div class="course-card-info">
+                                    <#if item.level == 1>
+									初级
+                                    <#elseif item.level == 2>
+									中级
+                                    <#else>
+									高级
+                                    </#if>
+                                    <span>·</span>${item.studyCount}人在学</div>
 							</div>
 						</div>
 					</div>
 					</a>
-
-					<a href="">
-					<div class="course-card-container">
-						<div class="course-card-top pink-bg">
-							<span>WebApp</span>
-						</div>
-						<div class="course-card-content">
-							<h3 class="course-card-name">AngularJS仿拉勾网WebApp 开发移动端单页应用</h3>
-							<p title="基于AngularJS，仿拉勾网开发一个招聘类的移动端单页应用">基于AngularJS，仿拉勾网开发一个招聘类的移动端单页应用</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">初级<span>·</span>3444人在学</div>
-							</div>
-						</div>
-					</div>
-					</a>
-					
-					<div class="course-card-container">
-						<div class="course-card-top brown-bg">
-							<span>Django</span>
-						</div>
-	
-						<div class="course-card-content">
-							<h3 class="course-card-name">强力django杀手级xadmin 打造上线标准的在线教育平台</h3>
-							<p title="全面掌握django框架,轻松应对python web开发工作">全面掌握django框架,轻松应对python web开发工作</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">初级<span>·</span>4888人在学</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="course-card-container">
-						<div class="course-card-top purple-bg">
-							<span>Python</span>
-						</div>
-	
-						<div class="course-card-content">
-							<h3 class="course-card-name">Python高级编程技巧实战</h3>
-							<p title="精选50个python训练任务，提升实战技能与高效编程技巧">精选50个python训练任务，提升实战技能与高效编程技巧</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">高级<span>·</span>81333人在学</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="course-card-container" style="margin-right: 0px;">
-						<div class="course-card-top green-bg">
-							<span>PHP</span>
-						</div>
-						
-						<div class="course-card-content">
-							<h3 class="course-card-name">前端后台ThinkPHP开发整站</h3>
-							<p title="用PHP+MySQL+Ajax开完新闻资讯整站，实现“小全栈”的梦想">用PHP+MySQL+Ajax开完新闻资讯整站，实现“小全栈”的梦想</p>
-							<div class="clearfix course-card-bottom">
-								<div class="course-card-info">中级<span>·</span>6133人在学</div>
-							</div>
-						</div>
-					</div>
-					
+                    </#list>
+					</#if>
 				</div>
 				
 			</div>
@@ -409,158 +325,102 @@
 			<!-- java课程-start -->
 			<div class="types-block clearfix">
 				<h3 class="types-title">Java开发工程师</h3>
+               <#if javaCourseList?? && javaCourseList?size gt 0>
+                <#assign javaC0 = javaCourseList[0] />
+               <a href="/course/learn/${javaC0.id}" target="_black">
 				<div class="types-content-left "
 					style="background-image: url(http://img.mukewang.com/58ac18fd00012a4202240348.jpg);">
 					<div class="course-card-container-fix">
 						<div class="course-card-content">
-							<h3 class="course-card-name">Java职业路径</h3>
-							<p class="color-fff" title="带你研究Java技术框架">带你研究Java技术框架，系统地学习java技术</p>
+							<h3 class="course-card-name">${javaC0.name}</h3>
+							<p class="color-fff" title="${javaC0.name}">${javaC0.name}</p>
 							<div class="course-card-bottom" style="margin-top: 50px;">
 								<div class="course-card-info color-fff">了解详情 →</div>
 							</div>
 						</div>
 					</div>
 				</div>
-	
+
+                   <#if javaCourseList?size gt 2>
+                    <#assign javaC1 = javaCourseList[1] />
+                    <#assign javaC2 = javaCourseList[2] />
 				<div class="types-content-right ">
 					<div class="types-content-banner ">
-						<a target="_blank" href="http://coding.imooc.com/class/81.html">
+						<a target="_black" href="/course/learn/${javaC1.id}" title="${javaC1.name}">
 							<div class="types-content-banner-block green-bg"  style="margin-right:20px;" >
-								Spring框架实战讲解！
+								${javaC1.name}
 							</div>
 						</a>
-						<a target="_blank" href="http://coding.imooc.com/class/76.html">
+						<a target="_black" href="/course/learn/${javaC2.id}" title="${javaC2.name}">
 							<div class="types-content-banner-block gray-bg"  >
-								MyBatis框架实战讲解！
+								${javaC2.name}
 							</div>
 						</a>
 					</div>
 					
 					<div class="clearfix">
-						<a href="">
-							<div class="course-card-container">
+                        <#list javaCourseList as item>
+                         <#if item_index gt 2>
+						<a target="_black" href="/course/learn/${item.id}" title="${item.name}">
+							<div class="course-card-container"  <#if item_index == 6>style="margin-right: 0px;" </#if>>
 								<div class="course-card-top green-bg">
-									<span>测试</span>
+									<span>${item.subClassifyName}</span>
 								</div>
 	
 								<div class="course-card-content">
-									<h3 class="course-card-name">Android自动化测试实战 工具 框架 脚本</h3>
-									<p title="找Android自动化测试工作必学的主流工具、框架和自动化脚本">找Android自动化测试工作必学的主流工具、框架和自动化脚本</p>
+                                    <h3 class="course-card-name" title="${item.name!}">${item.name!}</h3>
+                                    <p  class="course-card-brief" title="${item.brief!}">${item.brief!}</p>
 									<div class="course-card-bottom">
-										<div class="course-card-info">
-											初级<span>·</span>178人在学
-										</div>
-									</div>
-								</div>
-							</div>
-						</a> 
-						
-						<a href="">
-							<div class="course-card-container">
-								<div class="course-card-top pink-bg">
-									<span>WebApp</span>
-								</div>
-								<div class="course-card-content">
-									<h3 class="course-card-name">AngularJS仿拉勾网WebApp 开发移动端单页应用</h3>
-									<p title="基于AngularJS，仿拉勾网开发一个招聘类的移动端单页应用">基于AngularJS，仿拉勾网开发一个招聘类的移动端单页应用</p>
-									<div class="clearfix course-card-bottom">
-										<div class="course-card-info">
-											初级<span>·</span>3444人在学
-										</div>
+                                        <#if item.free==1>
+                                        <div class="course-card-info">
+											<#if item.level==1>
+                                            初级
+                                            <#elseif item.level==2>
+                                            中级
+                                            <#else >
+                                            高级
+                                            </#if>
+                                            <span>·</span> ${item.studyCount}人在学
+                                        </div>
+                                        <#else>
+                                        <div class="course-card-info">${item.studyCount}人在学</div>
+                                        <div class="course-card-price">￥${item.price!}</div>
+                                        </#if>
 									</div>
 								</div>
 							</div>
 						</a>
-	
-						<div class="course-card-container">
-							<div class="course-card-top brown-bg">
-								<span>Django</span>
-							</div>
-	
-							<div class="course-card-content">
-								<h3 class="course-card-name">强力django杀手级xadmin 打造上线标准的在线教育平台</h3>
-								<p title="全面掌握django框架,轻松应对python web开发工作">全面掌握django框架,轻松应对python
-									web开发工作</p>
-								<div class="clearfix course-card-bottom">
-									<div class="course-card-info">
-										初级<span>·</span>4888人在学
-									</div>
-								</div>
-							</div>
-						</div>
-	
-						<div class="course-card-container" style="margin-right: 0px;">
-							<div class="course-card-top purple-bg">
-								<span>Python</span>
-							</div>
-	
-							<div class="course-card-content">
-								<h3 class="course-card-name">Python高级编程技巧实战</h3>
-								<p title="精选50个python训练任务，提升实战技能与高效编程技巧">精选50个python训练任务，提升实战技能与高效编程技巧</p>
-								<div class="clearfix course-card-bottom">
-									<div class="course-card-info">
-										高级<span>·</span>81333人在学
-									</div>
-								</div>
-							</div>
-						</div>
-	
+                         </#if>
+                        </#list>
 					</div>
 				</div>
+                   </#if>
+                </#if>
 			</div>
 			<!-- java课程-end -->
 			
 			<!--名校讲师-start -->
 			<div class="types-block clearfix">
 				<h3 class="types-title">名校讲师</h3>
-				<a href="">
-					<div class="lecturer-card-container">
+                <#if teacherList?? && teacherList?size gt 0>
+                <#list teacherList as item>
+				<a href=" ">
+					<div class="lecturer-card-container" <#if item_index == 4 >style="margin-right: 0px;"</#if>>
 						<div class="lecturer-item">
-							<img class="lecturer-uimg" src="/i/header.jpg">
-							<span class="lecturer-name">王阳明</span>
-							<span class="lecturer-title">中华大学</span>
-							<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
+                            <#if item.header?? && item.header != ''>
+                            <img class="lecturer-uimg" src="${item.header}">
+                            <#else>
+                           <img class="lecturer-uimg" src="/i/header.jpg">
+                            </#if>
+							<span class="lecturer-name">${item.username}</span>
+							<span class="lecturer-title">${item.collegeName}·${item.education}</span>
+							<span class="lecturer-p" >${item.title},${item.sign} </span>
 						</div>
 					</div>
 				</a>
-					
-				<a href="">
-					<div class="lecturer-card-container">
-						<div class="lecturer-item">
-							<img class="lecturer-uimg" src="/i/header.jpg">
-							<span class="lecturer-name">王阳明</span>
-							<span class="lecturer-title">中华大学</span>
-							<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
-						</div>
-					</div>
-				</a>
+                </#list>
+                </#if>
 
-				<div class="lecturer-card-container">
-					<div class="lecturer-item">
-						<img class="lecturer-uimg" src="/i/header.jpg">
-						<span class="lecturer-name">王阳明</span>
-						<span class="lecturer-title">中华大学</span>
-						<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
-					</div>
-				</div>
-
-				<div class="lecturer-card-container"  >
-					<div class="lecturer-item">
-						<img class="lecturer-uimg" src="/i/header.jpg">
-						<span class="lecturer-name">王阳明</span>
-						<span class="lecturer-title">中华大学</span>
-						<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
-					</div>
-				</div>
-					
-				<div class="lecturer-card-container" style="margin-right: 0px;">
-					<div class="lecturer-item">
-						<img class="lecturer-uimg" src="/i/header.jpg">
-						<span class="lecturer-name">王阳明</span>
-						<span class="lecturer-title">中华大学</span>
-						<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
-					</div>
-				</div>
 					
 			</div>
 			<!--名校讲师-end -->
@@ -570,7 +430,7 @@
 		<!-- 页脚-start -->
 		<div class="f-footer">
 			<div class="f-footer-box clearfix">
-				<div class="footer-link">
+				<div class="footer-link" style="text-align: center">
 					<a href="javascript:void(0);"  target="_blank" title="企业合作">企业合作</a> 
 					<a href="javascript:void(0);" target="_blank" title="联系我们">联系我们</a> 
 					<a href="javascript:void(0);" target="_blank" title="常见问题">常见问题</a> 

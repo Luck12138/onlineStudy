@@ -18,6 +18,9 @@ import java.util.Map;
 public interface AuthUserDao {
 
 
+
+     List<AuthUser> selectTeacher();
+
      AuthUser getByUsername(String username);
 
      void addUser(AuthUser user);

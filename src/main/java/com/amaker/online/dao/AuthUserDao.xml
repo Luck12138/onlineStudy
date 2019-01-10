@@ -12,6 +12,14 @@
     </sql>
 
 
+    <select id="selectTeacher" resultType="com.amaker.online.model.AuthUser">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_auth_user
+        ORDER BY weight DESC
+        LIMIT 5
+
+    </select>
 
 
     <select id="selectUserById" parameterType="java.lang.Integer" resultType="com.amaker.online.model.AuthUser">

@@ -103,7 +103,7 @@ public class CrudTest {
     @Test
     public void qiniu(){
         //测试上传图片
-        byte[] buff = CommonUtil.getFileBytes(new File("G://IDEA/onlinestudy/src/main/resources/static/i/c2.jpg"));
+        byte[] buff = CommonUtil.getFileBytes(new File("F://360downloads/banner.jpg"));
         String key = QiniuStorage.uploadImage(buff);
         System.out.println("key = " + key);
 

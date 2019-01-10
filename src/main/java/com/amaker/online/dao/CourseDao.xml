@@ -10,6 +10,58 @@
         update_user, del, id
     </sql>
 
+    <select id="getTotalItemsCount" parameterType="com.amaker.online.model.Course" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_course
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            AND del = 0
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify, jdbcType=INTEGER}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale, jdbcType=INTEGER}
+            </if>
+            <if test="name != null">
+                AND name like CONCAT('%',#{name},'%' )
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectCoursePage" resultType="com.amaker.online.model.Course">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_course
+      <where>
+        <if test="param1.type != null">
+             type = #{param1.type, jdbcType=INTEGER}
+            </if>
+            <if test="param1.classify != null">
+                AND classify = #{param1.classify, jdbcType=INTEGER}
+            </if>
+            <if test="param1.subClassify != null">
+                AND sub_classify = #{param1.subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="param1.onsale != null">
+                AND onsale = #{param1.onsale, jdbcType=INTEGER}
+            </if>
+            <if test="param1.name != null">
+                AND name like CONCAT('%',#{param1.name},'%' )
+            </if>
+      </where>
+
+            <if test="param2.sortField != null and param2.sortField != '' ">
+                ORDER BY ${param2.sortField} ${param2.sortDirection}
+            </if>
+
+            LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+
+    </select>
+
     <select id="queryCourseByTo" parameterType="com.amaker.online.model.CourseQueryDto" resultType="com.amaker.online.model.Course">
        SELECT
         <include refid="All_Columns"/>

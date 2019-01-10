@@ -2,8 +2,10 @@ package com.amaker.online.service;
 
 import com.amaker.online.common.page.Page;
 import com.amaker.online.common.page.TailPage;
+import com.amaker.online.common.storage.QiniuStorage;
 import com.amaker.online.dao.AuthUserDao;
 import com.amaker.online.model.AuthUser;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,16 @@ public class AuthUserService {
         page.setItemsTotalCount(countByUser);
         page.setItems(userList);
         return page;
+    }
+
+    public List<AuthUser> selectTeacher(){
+        List<AuthUser> authUsers = authUserDao.selectTeacher();
+        for(AuthUser user:authUsers){
+            if(StringUtils.isNotEmpty(user.getHeader())){
+                user.setHeader(QiniuStorage.getUrl(user.getHeader()));
+            }
+        }
+        return authUsers;
     }
 
 

@@ -4,6 +4,8 @@ import com.amaker.online.dao.ConstsClassifyDao;
 import com.amaker.online.model.ConstsClassify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -21,5 +23,18 @@ public class ConstsClassifyService {
 
     public List<ConstsClassify> selectClassifys(){
         return constsClassifyDao.selectAllClassify();
+    }
+
+    public ConstsClassify selectByCode(String code){
+        if(StringUtils.isEmpty(code)){
+            return null;
+        }
+        ConstsClassify  constsClassify=new ConstsClassify();
+        constsClassify.setCode(code);
+        List<ConstsClassify> classifyList = constsClassifyDao.selectClassifyByCondition(constsClassify);
+        if(CollectionUtils.isEmpty(classifyList)){
+            return null;
+        }
+        return classifyList.get(0);
     }
 }
