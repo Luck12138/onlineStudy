@@ -23,6 +23,7 @@ public class AuthUserService {
     @Autowired
     private AuthUserDao authUserDao;
 
+
     public AuthUser selectUserByUsername(String username){
        return authUserDao.getByUsername(username);
     }

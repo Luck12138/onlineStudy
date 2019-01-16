@@ -2,15 +2,23 @@ package com.amaker.online.controller;
 
 import com.amaker.online.common.MD5Utils;
 import com.amaker.online.common.web.JsonView;
-import com.amaker.online.dao.AuthUserDao;
+import com.amaker.online.common.web.SessionContext;
 import com.amaker.online.model.AuthUser;
 import com.amaker.online.service.AuthUserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: onlinestudy
@@ -33,7 +41,7 @@ public class AuthController {
     @RequestMapping(value = "/register",method = {RequestMethod.POST,RequestMethod.GET})
     public String register(){
 
-        return "register";
+        return "auth/register";
     }
 
     /**
@@ -57,9 +65,50 @@ public class AuthController {
 
     @RequestMapping("/login")
     public String login(){
-        return "login";
+        if(SessionContext.isLogin()){
+            return "/";
+        }
+        return "auth/login";
     }
 
 
+
+    @RequestMapping("/doLogin")
+    public String doLogin(AuthUser user, Integer rememberMe, Model model){
+
+        if(SessionContext.getAuthUser() != null){
+            return "user/home";
+        };
+        Subject currentUser = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),MD5Utils.MD5(user.getPassword()));
+        try {
+            if(rememberMe != null && rememberMe == 1){
+                token.setRememberMe(true);
+
+            }
+            currentUser.login(token);
+            //shiro：不抛出异常，登陆成功
+            return "user/home";
+        }catch(AuthenticationException e){ //登录失败
+            model.addAttribute("errcode",2);
+            return "auth/login";
+        }
+    }
+
+    @RequestMapping("/ajaxlogin")
+    @ResponseBody
+    public String ajaxlogin(AuthUser user, Integer rememberMe){
+        Subject currentUser = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),MD5Utils.MD5(user.getPassword()));
+        try {
+            if(rememberMe != null && rememberMe == 1){
+                token.setRememberMe(true);
+            }
+            currentUser.login(token);//shiro：不抛出异常，登陆成功
+            return JsonView.getJSONString(0);
+        }catch(AuthenticationException e){ //登录失败
+            return JsonView.getJSONString(1, "用户名或密码不正确");
+        }
+    }
 
 }

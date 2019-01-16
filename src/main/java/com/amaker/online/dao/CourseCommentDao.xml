@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.CourseCommentDao">
+
+    <sql id="All_Columns">
+        username, to_username, course_id, section_id, section_title, content,
+        ref_id, ref_content, type, create_time, create_user, update_time,
+        update_user, del, id
+    </sql>
+
+    <select id="getCommentCount" parameterType="com.amaker.online.model.CourseComment" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_course_comment
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="courseId != null">
+                AND course_id = #{courseId, jdbcType=INTEGER}
+            </if>
+            <if test="sectionId != null">
+                AND section_id = #{sectionId, jdbcType=INTEGER}
+            </if>
+            AND del = 0
+        </trim>
+    </select>
+
+    <select id="selectCommentPage" resultType="com.amaker.online.model.CourseComment">
+        SELECT
+        c.username, c.to_username, c.course_id, c.section_id, c.section_title, c.content,
+        c.ref_id, c.ref_content, c.type, c.create_time, c.create_user, c.update_time,
+        c.update_user, c.del, c.id, u.header
+
+        FROM t_course_comment c
+        LEFT JOIN t_auth_user u
+        ON c.username = u.username
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="param1.type != null">
+                AND c.type = #{param1.type, jdbcType=INTEGER}
+            </if>
+            <if test="param1.courseId != null">
+                AND c.course_id = #{param1.courseId, jdbcType=INTEGER}
+            </if>
+            <if test="param1.sectionId != null">
+                AND c.section_id = #{param1.sectionId, jdbcType=INTEGER}
+            </if>
+            AND c.del = 0
+        </trim>
+        ORDER BY c.id DESC
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
+</mapper>

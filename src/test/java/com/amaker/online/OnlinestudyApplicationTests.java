@@ -1,5 +1,6 @@
 package com.amaker.online;
 
+import com.amaker.online.common.MD5Utils;
 import com.amaker.online.dao.AuthUserDao;
 import com.amaker.online.model.AuthUser;
 import com.amaker.online.service.AuthUserService;
@@ -20,13 +21,21 @@ public class OnlinestudyApplicationTests {
     @Autowired
     private AuthUserService authUserService;
 
+    @Autowired
+    private AuthUserDao authUserDao;
+
     public static Logger logger=LoggerFactory.getLogger(OnlinestudyApplicationTests.class);
 
     @Test
     public void contextLoads() {
 
-        AuthUser authUser = authUserService.selectUserByUsername("lisi");
-        logger.info(authUser.getSign());
+//        AuthUser authUser = authUserService.selectUserByUsername("lisi");
+//        logger.info(authUser.getSign());
+        AuthUser user=new AuthUser();
+        user.setUsername("www");
+        user.setPassword(MD5Utils.MD5("123456"));
+        AuthUser authUser = authUserDao.getUser(user);
+        logger.info(authUser.getPassword());
     }
 
 }

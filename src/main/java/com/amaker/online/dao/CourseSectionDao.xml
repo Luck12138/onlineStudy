@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.CourseSectionDao">
+
+    <sql id="All_Columns">
+        course_id, parent_id, name, sort, time, onsale, video_url,
+        create_time, create_user, update_time, update_user, del, id
+    </sql>
+    <select id="selectAllSection" parameterType="com.amaker.online.model.CourseSection" resultType="com.amaker.online.model.CourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_course_section
+        <where>
+            <if test="courseId !=null">
+                course_id=#{courseId}
+            </if>
+            <if test="onsale !=null">
+              AND  course_id=#{onsale}
+            </if>
+        </where>
+        ORDER BY parent_id,sort
+    </select>
+    <select id="selectSectionById" parameterType="java.lang.Long" resultType="com.amaker.online.model.CourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_course_section
+        WHERE id=#{id}
+    </select>
+</mapper>

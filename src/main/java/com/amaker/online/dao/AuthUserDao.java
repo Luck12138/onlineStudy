@@ -25,7 +25,10 @@ public interface AuthUserDao {
 
      void addUser(AuthUser user);
 
+     AuthUser getUser(AuthUser user);
+
      AuthUser selectUserById(int id);
+
 
      void updateUser(AuthUser authUser);
 

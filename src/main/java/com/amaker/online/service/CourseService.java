@@ -25,6 +25,10 @@ public class CourseService {
     @Autowired
     private CourseDao courseDao;
 
+    public Course getById(Long courseId){
+       return courseDao.getCourseById(courseId);
+    }
+
     private void prepareCoursePicture(Course course){
         if(null != course && StringUtils.isNotEmpty(course.getPicture())){
             course.setPicture(QiniuStorage.getUrl(course.getPicture()));

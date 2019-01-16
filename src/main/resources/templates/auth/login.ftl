@@ -7,11 +7,11 @@
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<title>网校在线学习平台</title>
-		<#include "res.ftl">
+        <#include "../common/res.ftl">
 	</head>
 
 	<body>
-		<#include "header2.ftl">
+		<#include "../common/header2.ftl">
 		<div class="f-main">
 			<div class="types-block clearfix" style="text-align: center;">
 				<h3 class="types-title">登录</h3>
@@ -44,7 +44,7 @@
 					</form>
 			</div>
 		</div>
-		<#include "footer.ftl">
+		<#include "../common/footer.ftl">
 	</body>
 	
 </html>

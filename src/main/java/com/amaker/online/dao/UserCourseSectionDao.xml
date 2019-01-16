@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.UserCourseSectionDao">
+
+
+    <sql id="All_Columns">
+        user_id, course_id, section_id, status, rate, create_time, create_user,
+        update_time, update_user, del, id
+    </sql>
+
+    <select id="selectSectionById" parameterType="com.amaker.online.model.UserCourseSection" resultType="com.amaker.online.model.UserCourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_user_course_section
+        <where>
+            <if test="userId!=null">
+                user_id=#{userId}
+            </if>
+            <if test="sectionId!=null">
+              AND  section_id=#{sectionId}
+            </if>
+            <if test="courseId!=null">
+              AND  course_id=#{courseId}
+            </if>
+        </where>
+    </select>
+</mapper>

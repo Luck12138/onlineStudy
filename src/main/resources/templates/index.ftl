@@ -8,33 +8,11 @@
 		<meta name="description" content="">
 		<title>在线网校学习平台</title>
 		
-		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-		<link href="/css/reset.css" rel="stylesheet" type="text/css"/>
-		<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-		
-		<!--[if lt IE 9]>
-		  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-		
-		<link rel="icon" type="image/png" href="/i/ico.png" sizes="16x16">
+		<#include "common/res.ftl">
 		<script type="text/javascript">
 		CONETXT_PATH = '';
 		</script>
         <script type="text/javascript">
-            function login(){
-                $('#loginTitle').css('color','#337Ab7');
-                $('#loginForm').show();
-                $('#registeTitle').css('color','#000');
-                $('#registeForm').hide();
-            }
-            function registe(){
-                $('#loginTitle').css('color','#000');
-                $('#loginForm').hide();
-                $('#registeTitle').css('color','#337Ab7');
-                $('#registeForm').show();
-            }
             $(function(){
                 $("#userdetail").popover({
                     trigger:'manual',
@@ -80,77 +58,8 @@
 	</head>
 
 	<body>
-		<!-- 头部-start -->
-		<div class="f-header">
-			<div class="f-header-box clearfix">
-				<a href=".." class="logo" title="网校在线学习平台"></a>
-				<nav class="header-nav">
-					<a href=".." class="header-nav-item">首 页</a>
-					<a href="/course/list" class="header-nav-item">课 程</a>
-					<a href="/pages/user/home" class="header-nav-item">我的</a>
-					<a href="/opt/index"  style="width:100px;" target="_blank" class="header-nav-item">运营CMS</a>
-				</nav>
-				
-				<nav class="header-nav" style="float:right">
-					<a href="#myModal" class="header-nav-item"  data-toggle="modal" onclick="login();"  style="margin-right:0px;font-size:14px;">登录</a>
-					<a href="/auth/register" class="header-nav-item"   style="margin-left:0px;font-size:14px;">注册</a>
-			        <a href="#" class="header-nav-item"  style="margin-left:0px;font-size:14px;" id="userdetail">头像</a>
-				</nav>
-			</div>
-		</div>
-		<!-- 头部-end -->
-		
-		<!-- 登录注册-start -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  style="position:fixed; top:30%;">
-		    <div class="modal-dialog" role="document">
-		        <div class="modal-content">
-		        
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		                    <span aria-hidden="true" style="font-size:18px;">×</span>
-		                </button>
-		                <h4 class="modal-title"  id="loginTitle"  style="float: left; color: #337Ab7;cursor: pointer; " onclick="login();">登 录</h4>
-		                <h4 class="modal-title"  id="registeTitle"  style="float: left;margin-left: 20px;cursor: pointer;" onclick="registe();">注 册</h4>
-		                <div class="clearfix"></div>
-		            </div>
-		            
-		            <div class="modal-body">
-		               	<form id="loginForm" class="form-horizontal" style="padding: 0px 20px;">
-		                      <div class="form-group">
-		                          <input type="email" class="form-control"  id="username"  placeholder="用户名">
-		                      </div>
-		                      <div class="form-group help">
-		                          <input type="password" class="form-control"  id="password"  placeholder="密　码">
-		                      </div>
-		                      <div class="form-group">
-		                          <label>
-		                           <input type="checkbox" value="None" id="checkbox1" name="check">
-		                           <span class="text" style="color: #787D82;font-size: 14px;">下次自动登录</span>
-		                          </label>
-		                      </div>
-		                      
-		                      <a href="javascript:void(0)">
-		                      	<div class="header-login-btn">登 录</div>
-		                      </a>
-		                  </form>
-		                  
-		                   <form id="registeForm" class="form-horizontal" style="padding: 0px 20px;display: none;">
-		                       <div class="form-group">
-		                           <input type="email" class="form-control"  id="username"  placeholder="用户名">
-		                       </div>
-		                       <div class="form-group help">
-		                           <input type="password" class="form-control"  id="password"  placeholder="密　码">
-		                       </div>
-		                       <a href="javascript:void(0)">
-		                      	<div class="header-login-btn">注 册</div>
-		                       </a>
-		                   </form>
-		                  
-		            </div>
-					
-		        </div>
-		    </div>
-		</div>
+		<#include "common/header.ftl">
+
 		<!-- 登录注册-end -->
 		
 		<div class="f-main">
@@ -410,7 +319,7 @@
                             <#if item.header?? && item.header != ''>
                             <img class="lecturer-uimg" src="${item.header}">
                             <#else>
-                           <img class="lecturer-uimg" src="/i/header.jpg">
+                           <img class="lecturer-uimg" src="/res/i/header.jpg">
                             </#if>
 							<span class="lecturer-name">${item.username}</span>
 							<span class="lecturer-title">${item.collegeName}·${item.education}</span>

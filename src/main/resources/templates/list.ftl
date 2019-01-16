@@ -8,41 +8,14 @@
 		<meta name="description" content="">
 		<title>在线网校学习平台</title>
 		
-		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/css/reset.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-
-        <!--[if lt IE 9]>
-		<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <link rel="icon" type="image/png" href="/i/ico.png" sizes="16x16">
+		<#include "common/res.ftl">
 		<script type="text/javascript">
 		CONETXT_PATH = '';
 		</script>
 	</head>
 
 	<body>
-		<!-- 头部-start -->
-		<div class="f-header">
-			<div class="f-header-box clearfix">
-				<a href=".."  class="logo" title="网校在线学习平台"></a>
-				<nav class="header-nav">
-					<a href=".." class="header-nav-item">首 页</a>
-					<a href="../course/list.html" class="header-nav-item">课 程</a>
-					<a href="../user/home.html" class="header-nav-item">我的</a>
-					<a href="../opt/index.html"  style="width:100px;" target="_blank" class="header-nav-item">运营CMS</a>
-				</nav>
-				
-				<nav class="header-nav" style="float:right">
-					<a href="#myModal" class="header-nav-item"  data-toggle="modal" onclick="login();"  style="margin-right:0px;font-size:14px;">登录</a>
-					<a href="../auth/register.html" class="header-nav-item"   style="margin-left:0px;font-size:14px;">注册</a>
-			        <a href="#" class="header-nav-item"  style="margin-left:0px;font-size:14px;" id="userdetail">头像</a>
-				</nav>
-			</div>
-		</div>
+		<#include "common/header.ftl">
 		<script type="text/javascript">
 			function login(){
 				$('#loginTitle').css('color','#337Ab7');
@@ -99,7 +72,7 @@
 			});
 		</script>
 		<!-- 头部-end -->
-		
+
 		<!-- 登录注册-start -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  style="position:fixed; top:30%;">
 		    <div class="modal-dialog" role="document">
@@ -249,7 +222,7 @@
 					</div>
 					</a>
                     </#list>
-                        <#include "tailPage.ftl">
+                        <#include "common/tailPage.ftl">
                     </#if>
 				</div>
 

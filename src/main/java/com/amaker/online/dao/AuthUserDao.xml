@@ -29,6 +29,8 @@
         WHERE id=#{id}
     </select>
 
+
+
     <update id="updateUser" parameterType="com.amaker.online.model.AuthUser">
         UPDATE t_auth_user
         SET realname=#{realname}
@@ -70,6 +72,14 @@
         </where>
     </select>
 
+
+    <select id="getUser" parameterType="com.amaker.online.model.AuthUser"  resultType="com.amaker.online.model.AuthUser">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM t_auth_user
+        WHERE username = #{username, jdbcType=VARCHAR}
+        AND password=#{password}
+    </select>
 
     <select id="getByUsername" parameterType="java.lang.String"  resultType="com.amaker.online.model.AuthUser">
         SELECT
