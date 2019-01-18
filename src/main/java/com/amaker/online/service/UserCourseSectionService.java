@@ -20,4 +20,16 @@ public class UserCourseSectionService {
     public UserCourseSection getSectionById(UserCourseSection userCourseSection){
         return userCourseSectionDao.selectSectionById(userCourseSection);
     }
+
+    public UserCourseSection selectLastSection(UserCourseSection userCourseSection){
+        return userCourseSectionDao.selectLastSection(userCourseSection);
+    }
+
+    public void update(UserCourseSection userCourseSection){
+        userCourseSectionDao.update(userCourseSection);
+    }
+
+    public void addUserSection(UserCourseSection userCourseSection){
+        userCourseSectionDao.createSelectivity(userCourseSection);
+    }
 }

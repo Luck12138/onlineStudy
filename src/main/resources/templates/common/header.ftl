@@ -15,8 +15,9 @@
 			</@shiro.guest>
 
             <@shiro.user>
-			<a href="/user/home" class="header-nav-item"  style="margin-left:0px;width:40px;height:40px;" id="userdetail">
+			<a href="/user/home" class="header-nav-item"  style="margin-left:0px;width:40px;height:40px;">
 	        	<img id="headerUserHeader" alt="" src='<@shiro.principal property="header"/>' style="width: 35px;height: 35px;border-radius:50%;">
+                <a  href="/logout" class="header-nav-item"  style="margin-left:0px;font-size:14px;">登出</a>
 	        </a>
             </@shiro.user>
 		
@@ -28,18 +29,6 @@
                 <div style="margin-top:10px;">
                     <span style="font-size: 16px;">用户名：<@shiro.principal property="username"/></span>
                 </div>
-
-                <div style="margin-top:20px;">
-                    <a id="curCourseA" class="link-a" target="_blank" href="">
-                        <div id="curCourseSpan" class="ellipsis" style="font-size: 16px;width:220px;height:30px;overflow:hidden;font-weight:bold;" title="" ></div>
-                    </a>
-                </div>
-                <div style="margin-top:5px;" >
-                    <a id="curCourseSectionA"  class="link-a" target="_blank" href="">
-                        <div id="curCourseSectionSpan" class="ellipsis"  style="font-size: 14px;width:220px;height:30px;overflow:hidden;" title=""></div>
-                    </a>
-                </div>
-
                 <div style="margin-top:20px;border-top:1px solid #eee;width:200px;padding-top:10px;">
                     <a class="link-a" href="/logout">
                         <span>退出</span>
@@ -116,71 +105,11 @@
             var headPhoto = "../res/i/header.jpg";
             $('#headerUserHeader').attr('src',headPhoto);
         }
-        //一级菜单&二级菜单
-        $(".category").popover({
-            trigger:'manual',
-            placement : 'right',
-            html: 'true',
-            content : '',
-            animation: false
-        }).on("mouseenter", function () {
-            var cid = $(this).attr('c-id');
-            $('#' + cid).show();
-            $('#' + cid).hover(function(){
-                $('#' + cid).show();
-            },function(){
-                $('#' + cid).hide();
-            });
-        }).on("mouseleave", function () {
-            var cid = $(this).attr('c-id');
-            $('#' + cid).hide();
-        });
 
-        if(SHIRO_LOGIN){
-            //获取当前用户学习进度
-            $.ajax({
-                url:'/course/getCurLeanInfo',
-                type:'POST',
-                dataType:'json',
-                success:function(resp){
-                    if(resp.errcode == 0 && resp.data){
-                        var learnUrl = "/course/learn/"+resp.data.curCourse.id;
-                        var learnTitle = resp.data.curCourse.name;
-                        $('#curCourseA').attr('href',learnUrl)
-                        $('#curCourseSpan').attr('title',learnTitle).html(learnTitle);
 
-                        var videoUrl = "/course/video/"+resp.data.curCourseSection.id;
-                        var videoTitle = resp.data.curCourseSection.name;
-                        $('#curCourseSectionA').attr('href',videoUrl)
-                        $('#curCourseSectionSpan').attr('title',videoTitle).html(videoTitle);
-                    }
-                }
-            });
-
-            $("#userdetail").popover({
-                trigger:'manual',
-                placement : 'bottom',
-                html: true,
-                content : '<div id="userdetailContent" style="width:300px;height:200px;"></div>',
-                animation: false
-            }).on("mouseenter", function () {
-                var _this = this;
-                $(this).popover("show");
-                var userdetailHtml = $('#userdetailHtml').html();
-                $('#userdetailContent').html(userdetailHtml);
-                $(this).siblings(".popover").on("mouseleave", function () {
-                    $(_this).popover('hide');
-                });
-            }).on("mouseleave", function () {
-                var _this = this;
-                setTimeout(function () {
-                    if (!$(".popover:hover").length) {
-                        $(_this).popover("hide")
-                    }
-                }, 500);
-            });
-        }
     });
+
+
 
 
 

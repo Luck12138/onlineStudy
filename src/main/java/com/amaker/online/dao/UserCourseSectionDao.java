@@ -13,4 +13,10 @@ import org.springframework.stereotype.Component;
 public interface UserCourseSectionDao {
 
     UserCourseSection selectSectionById(UserCourseSection userCourseSection);
+
+    UserCourseSection selectLastSection(UserCourseSection userCourseSection);
+
+    void createSelectivity(UserCourseSection userCourseSection);
+
+    void update(UserCourseSection userCourseSection);
 }

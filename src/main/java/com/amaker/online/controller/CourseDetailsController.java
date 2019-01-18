@@ -1,14 +1,13 @@
 package com.amaker.online.controller;
 
 import com.amaker.online.common.storage.QiniuStorage;
-import com.amaker.online.model.AuthUser;
-import com.amaker.online.model.Course;
-import com.amaker.online.model.CourseQueryDto;
-import com.amaker.online.model.CourseSectionVO;
+import com.amaker.online.model.*;
 import com.amaker.online.service.AuthUserService;
 import com.amaker.online.service.CourseSectionService;
 import com.amaker.online.service.CourseService;
+import com.amaker.online.service.UserCourseSectionService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +35,9 @@ public class CourseDetailsController {
     @Autowired
     private CourseSectionService courseSectionService;
 
+    @Autowired
+    private UserCourseSectionService userCourseSectionService;
+
 
     @RequestMapping(value = "/learn/{courseId}")
     public String learn(@PathVariable("courseId") Long courseId, Model model){
@@ -62,6 +64,18 @@ public class CourseDetailsController {
         //获取章节
         List<CourseSectionVO> sectionVOList = courseSectionService.selectSectionList(courseId);
         model.addAttribute("chapterSection",sectionVOList);
+
+
+        //获取学习进度
+        AuthUser user = (AuthUser) SecurityUtils.getSubject().getPrincipal();
+        UserCourseSection userCourseSection=new UserCourseSection();
+        userCourseSection.setUserId(user.getId());
+        userCourseSection.setCourseId(courseId);
+        UserCourseSection selectLastSection = userCourseSectionService.selectLastSection(userCourseSection);
+        if(selectLastSection!=null){
+            CourseSection courseSection = courseSectionService.selectSectionById(selectLastSection.getSectionId());
+            model.addAttribute("curCourseSection",courseSection);
+        }
         return "learn";
     }
 }
