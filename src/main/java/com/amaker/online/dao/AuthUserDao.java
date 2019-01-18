@@ -29,6 +29,7 @@ public interface AuthUserDao {
 
      AuthUser selectUserById(int id);
 
+     void  updateSelectivity(AuthUser user);
 
      void updateUser(AuthUser authUser);
 

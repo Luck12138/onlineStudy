@@ -19,4 +19,6 @@ public interface CourseCommentDao {
     int getCommentCount(CourseComment courseComment);
 
     List<CourseComment> selectCommentPage(CourseComment courseComment, TailPage<CourseComment> page);
+
+    void addComment(CourseComment courseComment);
 }

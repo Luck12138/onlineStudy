@@ -8,6 +8,22 @@
         update_time, update_user, del, id
     </sql>
 
+    <select id="getUserSectionCount" parameterType="com.amaker.online.model.UserCourseSection" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_user_course_section
+        WHERE user_id=#{userId}
+    </select>
+
+    <select id="selectUserSectionPage" resultType="com.amaker.online.model.UserCourseSectionDto">
+        SELECT t.*, c.name AS courseName, s.name AS sectionName
+        FROM t_user_course_section t, t_course_section s, t_course c
+        WHERE t.user_id=#{param1.userId}
+        AND t.course_id=c.id
+        AND t.section_id=s.id
+        ORDER BY id DESC
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
+
     <select id="selectSectionById" parameterType="com.amaker.online.model.UserCourseSection" resultType="com.amaker.online.model.UserCourseSection">
         SELECT
         <include refid="All_Columns"/>

@@ -64,4 +64,9 @@ public class AuthUserService {
     }
 
 
+    public void updateUser(AuthUser authUser){
+        authUserDao.updateSelectivity(authUser);
+    }
+
+
 }

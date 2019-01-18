@@ -29,4 +29,8 @@ public class CourseCommentService {
         page.setItems(commentPage);
         return page;
     }
+
+    public void addComment(CourseComment courseComment){
+        commentDao.addComment(courseComment);
+    }
 }

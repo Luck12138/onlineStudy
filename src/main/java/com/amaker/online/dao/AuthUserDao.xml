@@ -11,6 +11,90 @@
         del, id
     </sql>
 
+    <update id="updateSelectivity" parameterType="com.amaker.online.model.AuthUser">
+        UPDATE t_auth_user
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="realname != null ">
+                realname = #{realname, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+                username = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null ">
+                password = #{password, jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null ">
+                gender = #{gender, jdbcType=INTEGER},
+            </if>
+            <if test="header != null ">
+                header = #{header, jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null ">
+                mobile = #{mobile, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null ">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null ">
+                birthday = #{birthday, jdbcType=DATE},
+            </if>
+            <if test="education != null ">
+                education = #{education, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeCode != null ">
+                college_code = #{collegeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null ">
+                college_name = #{collegeName, jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null ">
+                cert_no = #{certNo, jdbcType=VARCHAR},
+            </if>
+            <if test="title != null ">
+                title = #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null ">
+                sign = #{sign, jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null ">
+                open_id = #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null ">
+                wechat_id = #{wechatId, jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null ">
+                qq = #{qq, jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null ">
+                login_time = #{loginTime, jdbcType=DATE},
+            </if>
+            <if test="ip != null ">
+                ip = #{ip, jdbcType=VARCHAR},
+            </if>
+            <if test="province != null ">
+                province = #{province, jdbcType=VARCHAR},
+            </if>
+            <if test="city != null ">
+                city = #{city, jdbcType=VARCHAR},
+            </if>
+            <if test="district != null ">
+                district = #{district, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+                weight = #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
 
     <select id="selectTeacher" resultType="com.amaker.online.model.AuthUser">
         SELECT

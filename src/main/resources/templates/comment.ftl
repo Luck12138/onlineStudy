@@ -2,7 +2,7 @@
 <#if (page.items)??>
 	<#list page.items as item>
 <div class="comment clearfix">
-    <div class="comment-header"><img class="lecturer-uimg" src="/i/header.jpg"></div>
+    <div class="comment-header"><img class="lecturer-uimg" src="/res/i/header.jpg"></div>
     <div class="comment-main">
         <div class="user-name">${item.username!} 评论道：</div>
 		<#if item.refContent?? && item.refContent != ''>

@@ -1,5 +1,6 @@
 package com.amaker.online.dao;
 
+import com.amaker.online.common.page.TailPage;
 import com.amaker.online.model.UserCollections;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Component;
@@ -20,4 +21,8 @@ public interface UserCollectionDao {
     void deleteCollection(UserCollections userCollections);
 
     void addCollection(UserCollections userCollections);
+
+    int getUserCollectCount(UserCollections userCollections);
+
+    List<UserCollections> selectUserCollectPage(UserCollections userCollections, TailPage<UserCollections> page);
 }

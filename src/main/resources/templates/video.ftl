@@ -80,37 +80,19 @@
 						<div class="course-video">
 							<video src="/res/demo.mp4" width="100%" height="100%" controls preload></video>
 						</div>
-						
-						<div class="course-menu">
-							<a  href="javascript:void(0)"><span class="menu-item  cur">评论</span></a>
-						</div>
+
+                        <div  class="course-menu">
+                            <a  href="javascript:void(0)" >
+                                <span onclick="showTab(this,0);" class="menu-item  cur">评论</span>
+                            </a>
+                            <a  href="javascript:void(0)" >
+                                <span onclick="showTab(this,1);" class="menu-item">问答</span>
+                            </a>
+                        </div>
 				</div>
 				
 				<!-- 评论-start -->
-				<div>
-						<div class="comment clearfix">
-							<div class="comment-header"><img class="lecturer-uimg" src="/res/i/header.jpg"></div>
-							<div class="comment-main">
-								<div class="user-name">我是张三</div>
-								<div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
-								<div class="comment-footer">
-									<span>时间：2016-12-05 </span>
-									<a href="">2-2 我是java第二节</a>
-								</div>
-							</div>
-						</div>		
-								
-						<div class="comment clearfix">
-							<div class="comment-header"><img class="lecturer-uimg" src="../res/i/header.jpg"></div>
-							<div class="comment-main">
-								<div class="user-name">我是张三</div>
-								<div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
-								<div class="comment-footer">
-									<span>时间：2016-12-05 </span>
-									<a href="">2-2 我是java第二节</a>
-								</div>
-							</div>
-						</div>		
+				<div id="commentQA">
 				</div>
 				
 				<!-- 发布评论-start -->
@@ -121,8 +103,8 @@
 					</div>
 					<form id="commentForm" action="/courseComment/doComment" method="post"  style="margin: 5px 0px;">
 						<input type="hidden" id="commentType" name="type" value="0"/>
-						<input type="hidden" name="sectionId" value="ss"/>
-						<input type="hidden" name="courseId" value="ss"/>
+						<input type="hidden" name="sectionId" value="${courseSection.id}"/>
+						<input type="hidden" name="courseId" value="${courseSection.courseId}"/>
 						
 						<textarea id="content" name="content" rows="" cols="100"></textarea>
 					</form>
@@ -199,7 +181,86 @@
 						$(this).find('.drop-down').html('▲');
 					}
 				});
-			});	
+
+                //默认加载评论
+                _queryPage(1,0);
+			});
+
+            /**
+             *展示tab commentQA
+             **/
+            function showTab(el,type){
+                $('.course-menu').find('span').each(function(i,item){
+                    $(item).removeClass('cur');
+                });
+                $(el).addClass('cur');
+
+                _queryPage(1,type);//默认加载 第 1 页
+                //设置评论类型
+                $('#commentType').val(type);
+            }
+
+            /**
+             *加载 课程评论 & 问答
+             * courseId：课程id
+             * sectionId: 章节id
+             * type : 类型 0-评论；1-答疑
+             */
+            var _type = 0; //全局变量
+            function _queryPage(pageNum,type){
+                if(type == undefined)
+                    type = _type;
+                else
+                    _type = type;
+                //加载评论或者QA
+                if(pageNum == undefined)
+                    pageNum = 1;
+                var courseId = ${(courseSection.courseId)!};//课程id
+                var sectionId = ${(courseSection.id)!};//章节id
+                var url = '/courseComment/segment';
+                $("#commentQA").load(
+                        url,
+                        {
+                            'courseId':courseId,
+                            'sectionId':sectionId,
+                            'type':type,
+                            'pageNum':pageNum
+                        },
+                        function(){}
+                );
+            };
+
+            <@shiro.user>
+			//提交
+			function doComment(){
+                var content = $('#content').val();
+                if($.trim(content).length > 200 || $.trim(content).length == 0){
+                    $('#commentTip').css('color','red').html('评论内容长度请 &gt; 0 , &lt; 200');
+                    return;
+                }
+
+                $('#commentForm').ajaxSubmit({
+                    datatype : 'json',
+                    success : function(resp) {
+                        var resp = $.parseJSON(resp);
+                        if (resp.errcode == 0) {
+                            $('#commentTip').css('color','green').html('评论成功');
+                            //自动刷新
+
+                        } else if(resp.errcode == 1) {
+                            $('#commentTip').css('color','red').html('评论失败');
+                        } else if(resp.errcode == 3) {
+                            $('#commentTip').css('color','red').html('评论内容长度请 &gt; 0 , &lt; 200');
+                        }
+
+                        $('#content').val('');
+                    },
+                    error : function(xhr) {
+                    }
+                });
+            }
+			</@shiro.user>
+
 		</script>
 		
 	</body>

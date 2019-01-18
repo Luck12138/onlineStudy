@@ -1,6 +1,6 @@
 
-<img id="userNavHeader" class="setting-header" src=""></img>
-	<div>ww</div>
+<img id="userNavHeader" class="setting-header" src="<@shiro.principal property="header"/>"></img>
+	<div><@shiro.principal property="username"/></div>
 <div class="split-line" style="margin-bottom: 20px;"></div>
 
 <ul class="user-menu-nav-block">
@@ -18,9 +18,6 @@
 	</a>
 	<a href="/user/passwd">
 		<li <#if curNav?? && curNav =="passwd">class="user-menu-nav-cur"<#else>class="user-menu-nav"</#if> >修改密码  <span>&gt;</span></li>
-	</a>
-	<a href="/user/qa">
-		<li <#if curNav?? && curNav =="qa">class="user-menu-nav-cur"<#else>class="user-menu-nav"</#if> >答疑  <span>&gt;</span></li>
 	</a>
 </ul>
 <script type="text/javascript">

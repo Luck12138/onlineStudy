@@ -5,7 +5,6 @@
             <a href="/" class="header-nav-item">首 页</a>
             <a href="/course/list" class="header-nav-item">课 程</a>
             <a href="/user/home" class="header-nav-item">我的</a>
-            <a href="http://m.ioswift.org" target="_blank" class="header-nav-item" style="width:100px;">M站</a>
         </nav>
     </div>
 </div>

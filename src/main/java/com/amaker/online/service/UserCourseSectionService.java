@@ -1,9 +1,13 @@
 package com.amaker.online.service;
 
+import com.amaker.online.common.page.TailPage;
 import com.amaker.online.dao.UserCourseSectionDao;
 import com.amaker.online.model.UserCourseSection;
+import com.amaker.online.model.UserCourseSectionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @program: onlinestudy
@@ -31,5 +35,14 @@ public class UserCourseSectionService {
 
     public void addUserSection(UserCourseSection userCourseSection){
         userCourseSectionDao.createSelectivity(userCourseSection);
+    }
+
+    public TailPage<UserCourseSectionDto> selectUserSectionPage(UserCourseSection userCourseSection,TailPage<UserCourseSectionDto> page){
+        List<UserCourseSectionDto> userCourseSectionDtos = userCourseSectionDao.selectUserSectionPage(userCourseSection, page);
+        int userSectionCount = userCourseSectionDao.getUserSectionCount(userCourseSection);
+        page.setItems(userCourseSectionDtos);
+        page.setItemsTotalCount(userSectionCount);
+        return page;
+
     }
 }

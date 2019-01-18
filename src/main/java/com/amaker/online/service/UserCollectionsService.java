@@ -1,5 +1,6 @@
 package com.amaker.online.service;
 
+import com.amaker.online.common.page.TailPage;
 import com.amaker.online.dao.UserCollectionDao;
 import com.amaker.online.model.UserCollections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,13 @@ public class UserCollectionsService {
 
     public void addCollection(UserCollections userCollections){
         userCollectionDao.addCollection(userCollections);
+    }
+
+    public TailPage<UserCollections> selectUserCollectPage(UserCollections userCollections,TailPage<UserCollections> page){
+        List<UserCollections> collectionsList = userCollectionDao.selectUserCollectPage(userCollections, page);
+        int userCollectCount = userCollectionDao.getUserCollectCount(userCollections);
+        page.setItemsTotalCount(userCollectCount);
+        page.setItems(collectionsList);
+        return page;
     }
 }

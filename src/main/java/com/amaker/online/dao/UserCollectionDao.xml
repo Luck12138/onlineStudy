@@ -22,6 +22,21 @@
         </where>
     </select>
 
+    <select id="getUserCollectCount" parameterType="com.amaker.online.model.UserCollections" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_user_collections
+        WHERE user_id=#{userId}
+    </select>
+
+    <select id="selectUserCollectPage" resultType="com.amaker.online.model.UserCollections">
+        SELECT c.object_id,c.id,s.name,c.create_time,c.classify
+        FROM t_user_collections c, t_course s
+        WHERE c.object_id=s.id
+        AND c.classify=1
+        ORDER BY id DESC
+        LIMIT #{param2.startIndex},#{param2.pageSize}
+    </select>
+
     <delete id="deleteCollection" parameterType="com.amaker.online.model.UserCollections">
         DELETE
         FROM t_user_collections
