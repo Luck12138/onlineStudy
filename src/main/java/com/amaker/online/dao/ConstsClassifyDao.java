@@ -17,4 +17,15 @@ public interface ConstsClassifyDao {
     List<ConstsClassify> selectAllClassify();
 
     List<ConstsClassify> selectClassifyByCondition(ConstsClassify constsClassify);
+
+    ConstsClassify selectClassifyById(int id);
+
+    ConstsClassify selectById(Long id);
+
+
+    void updateClassify(ConstsClassify constsClassify);
+
+    void createClassify(ConstsClassify constsClassify);
+
+    void deleteClassify(ConstsClassify constsClassify);
 }

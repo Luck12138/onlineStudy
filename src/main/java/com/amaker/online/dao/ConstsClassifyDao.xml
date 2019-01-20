@@ -11,7 +11,118 @@
         SELECT
         <include refid="All_Columns"/>
         FROM t_consts_classify
+        WHERE del=0
         ORDER BY parent_code,sort
+    </select>
+
+    <insert id="createClassify" parameterType="com.amaker.online.model.ConstsClassify">
+        INSERT INTO t_consts_classify
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                name,
+            </if>
+            <if test="code != null ">
+                CODE,
+            </if>
+            <if test="parentCode != null ">
+                parent_code,
+            </if>
+            <if test="sort != null ">
+                sort,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="code != null ">
+                #{code, jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null ">
+                #{parentCode, jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null ">
+                #{sort, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateClassify" parameterType="com.amaker.online.model.ConstsClassify">
+        UPDATE t_consts_classify
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null ">
+                parent_code = #{parentCode, jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null ">
+                sort = #{sort, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
+
+    <update id="deleteClassify" parameterType="com.amaker.online.model.ConstsClassify">
+    UPDATE  t_consts_classify
+    SET del=1
+    WHERE id=#{id}
+    </update>
+
+    <select id="selectClassifyById" parameterType="java.lang.Integer" resultType="com.amaker.online.model.ConstsClassify">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_consts_classify
+        WHERE id=#{id}
+    </select>
+
+
+
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.amaker.online.model.ConstsClassify">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_consts_classify
+        WHERE id=#{id}
     </select>
 
     <select id="selectClassifyByCondition" parameterType="com.amaker.online.model.ConstsClassify" resultType="com.amaker.online.model.ConstsClassify">

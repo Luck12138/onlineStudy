@@ -14,4 +14,128 @@
         ORDER BY weight desc
         LIMIT 0,#{count}
     </select>
+
+    <select id="selectCarouseCount" parameterType="com.amaker.online.model.ConstsSiteCarousel" resultType="java.lang.Integer">
+        SELECT count(*)  FROM t_consts_site_carousel
+    </select>
+
+    <delete id="deleteCarousel" parameterType="com.amaker.online.model.ConstsSiteCarousel">
+        DELETE FROM t_consts_site_carousel
+        WHERE id=#{id}
+    </delete>
+
+    <insert id="createCarousel" parameterType="com.amaker.online.model.ConstsSiteCarousel">
+        INSERT INTO t_consts_site_carousel
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                name,
+            </if>
+            <if test="picture != null ">
+                picture,
+            </if>
+            <if test="url != null ">
+                url,
+            </if>
+            <if test="weight != null ">
+                weight,
+            </if>
+            <if test="enable != null ">
+                enable,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+                #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="url != null ">
+                #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+                #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="enable != null ">
+                #{enable, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateCarousel" parameterType="com.amaker.online.model.ConstsSiteCarousel">
+        UPDATE t_consts_site_carousel
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+                picture = #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="url != null ">
+                url = #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+                weight = #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="enable != null ">
+                enable = #{enable, jdbcType=TINYINT},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <select id="selectCarouseById" parameterType="com.amaker.online.model.ConstsSiteCarousel" resultType="com.amaker.online.model.ConstsSiteCarousel">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_consts_site_carousel
+        WHERE id=#{id}
+    </select>
+    <select id="selectCarousePage" resultType="com.amaker.online.model.ConstsSiteCarousel">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_consts_site_carousel
+        ORDER BY id DESC
+        LIMIT #{param2.startIndex},#{param2.pageSize}
+    </select>
 </mapper>

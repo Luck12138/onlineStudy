@@ -56,4 +56,12 @@ public class CourseService {
         page.setItems(courses);
         return page;
     }
+
+    public void updateCourse(Course course){
+        courseDao.updateCourse(course);
+    }
+
+    public void deleteCourse(Course course){
+        courseDao.deleteCourse(course);
+    }
 }

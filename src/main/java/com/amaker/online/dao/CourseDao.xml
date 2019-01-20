@@ -10,6 +10,17 @@
         update_user, del, id
     </sql>
 
+    <delete id="deleteCourse" parameterType="com.amaker.online.model.Course">
+        DELETE FROM t_course
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateCourse" parameterType="com.amaker.online.model.Course">
+        UPDATE t_course
+        SET onsale=#{onsale}
+        WHERE id=#{id}
+    </update>
+
     <select id="getTotalItemsCount" parameterType="com.amaker.online.model.Course" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_course
         <trim prefix="WHERE " prefixOverrides="AND |OR ">

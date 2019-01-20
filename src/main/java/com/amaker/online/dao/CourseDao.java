@@ -33,4 +33,8 @@ public interface CourseDao {
 
     @Select({"select",SELECT_FIELDS," from ",TABLE_NAME,"where id=#{courseId}"})
     public Course getCourseById(@Param("courseId") long courseId);
+
+    void updateCourse(Course course);
+
+    void deleteCourse(Course course);
 }
