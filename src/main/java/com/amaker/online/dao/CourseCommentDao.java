@@ -21,4 +21,6 @@ public interface CourseCommentDao {
     List<CourseComment> selectCommentPage(CourseComment courseComment, TailPage<CourseComment> page);
 
     void addComment(CourseComment courseComment);
+
+    void deleteById(CourseComment courseComment);
 }

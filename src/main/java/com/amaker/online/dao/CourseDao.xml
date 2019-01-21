@@ -107,4 +107,221 @@
             LIMIT #{start, jdbcType=INTEGER} , #{end, jdbcType=INTEGER}
         </if>
     </select>
+
+    <insert id="createCourse" parameterType="com.amaker.online.model.Course">
+        INSERT INTO t_course
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                name,
+            </if>
+            <if test="type != null ">
+                type,
+            </if>
+            <if test="classify != null ">
+                classify,
+            </if>
+            <if test="classifyName != null ">
+                classify_name,
+            </if>
+            <if test="subClassify != null ">
+                sub_classify,
+            </if>
+            <if test="subClassifyName != null ">
+                sub_classify_name,
+            </if>
+            <if test="direction != null ">
+                direction,
+            </if>
+            <if test="username != null ">
+                username,
+            </if>
+            <if test="level != null ">
+                level,
+            </if>
+            <if test="free != null ">
+                free,
+            </if>
+            <if test="price != null ">
+                price,
+            </if>
+            <if test="time != null ">
+                time,
+            </if>
+            <if test="onsale != null ">
+                onsale,
+            </if>
+            <if test="brief != null ">
+                brief,
+            </if>
+            <if test="picture != null ">
+                picture,
+            </if>
+            <if test="recommend != null ">
+                recommend,
+            </if>
+            <if test="weight != null ">
+                weight,
+            </if>
+            <if test="studyCount != null ">
+                study_count,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+                #{type, jdbcType=VARCHAR},
+            </if>
+            <if test="classify != null ">
+                #{classify, jdbcType=VARCHAR},
+            </if>
+            <if test="classifyName != null ">
+                #{classifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassify != null ">
+                #{subClassify, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassifyName != null ">
+                #{subClassifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null ">
+                #{direction, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+                #{username, jdbcType=INTEGER},
+            </if>
+            <if test="level != null ">
+                #{level, jdbcType=INTEGER},
+            </if>
+            <if test="free != null ">
+                #{free, jdbcType=INTEGER},
+            </if>
+            <if test="price != null ">
+                #{price, jdbcType=DECIMAL},
+            </if>
+            <if test="time != null ">
+                #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="onsale != null ">
+                #{onsale, jdbcType=INTEGER},
+            </if>
+            <if test="brief != null ">
+                #{brief, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+                #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="recommend != null ">
+                #{recommend, jdbcType=INTEGER},
+            </if>
+            <if test="weight != null ">
+                #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="studyCount != null ">
+                #{studyCount, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateAllCourse" parameterType="com.amaker.online.model.Course">
+        UPDATE t_course
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+                type = #{type, jdbcType=VARCHAR},
+            </if>
+            <if test="classify != null ">
+                classify = #{classify, jdbcType=VARCHAR},
+            </if>
+            <if test="classifyName != null ">
+                classify_name = #{classifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassify != null ">
+                sub_classify = #{subClassify, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassifyName != null ">
+                sub_classify_name = #{subClassifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null ">
+                direction = #{direction, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+                username = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="level != null ">
+                level = #{level, jdbcType=INTEGER},
+            </if>
+            <if test="free != null ">
+                free = #{free, jdbcType=INTEGER},
+            </if>
+            <if test="price != null ">
+                price = #{price, jdbcType=VARCHAR},
+            </if>
+            <if test="time != null ">
+                time = #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="onsale != null ">
+                onsale = #{onsale, jdbcType=INTEGER},
+            </if>
+            <if test="brief != null ">
+                brief = #{brief, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+                picture = #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="recommend != null ">
+                recommend = #{recommend, jdbcType=INTEGER},
+            </if>
+            <if test="weight != null ">
+                weight = #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="studyCount != null ">
+                study_count = #{studyCount, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
 </mapper>

@@ -11,14 +11,15 @@
         <include refid="All_Columns"/>
         FROM t_course_section
         <where>
+            del=0
             <if test="courseId !=null">
-                course_id=#{courseId}
+             AND   course_id=#{courseId}
             </if>
             <if test="onsale !=null">
-              AND  course_id=#{onsale}
+              AND  onsale=#{onsale}
             </if>
         </where>
-        ORDER BY parent_id,sort
+        ORDER BY parent_id,id
     </select>
     <select id="selectSectionById" parameterType="java.lang.Long" resultType="com.amaker.online.model.CourseSection">
         SELECT
@@ -26,4 +27,131 @@
         FROM t_course_section
         WHERE id=#{id}
     </select>
+
+    <insert id="createCourseSection" parameterType="com.amaker.online.model.CourseSection">
+        INSERT INTO t_course_section
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="courseId != null ">
+                course_id,
+            </if>
+            <if test="parentId != null ">
+                parent_id,
+            </if>
+            <if test="name != null ">
+                name,
+            </if>
+            <if test="sort != null ">
+                sort,
+            </if>
+            <if test="time != null ">
+                time,
+            </if>
+            <if test="onsale != null ">
+                onsale,
+            </if>
+            <if test="videoUrl != null ">
+                video_url,
+            </if>
+            <if test="createTime != null ">
+                CREATE_TIME,
+            </if>
+            <if test="createUser != null ">
+                CREATE_USER,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="courseId != null ">
+                #{courseId, jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null ">
+                #{parentId, jdbcType=INTEGER},
+            </if>
+            <if test="name != null ">
+                #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null ">
+                #{sort, jdbcType=INTEGER},
+            </if>
+            <if test="time != null ">
+                #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="onsale != null ">
+                #{onsale, jdbcType=INTEGER},
+            </if>
+            <if test="videoUrl != null ">
+                #{videoUrl, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="deleteCourseSection" parameterType="com.amaker.online.model.CourseSection">
+        UPDATE t_course_section
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+        OR parent_id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <update id="updateCourseSection" parameterType="com.amaker.online.model.CourseSection">
+        UPDATE t_course_section
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="courseId != null ">
+                course_id = #{courseId, jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null ">
+                parent_id = #{parentId, jdbcType=VARCHAR},
+            </if>
+            <if test="name != null ">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null ">
+                sort = #{sort, jdbcType=INTEGER},
+            </if>
+            <if test="time != null ">
+                time = #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="onsale != null ">
+                onsale = #{onsale, jdbcType=INTEGER},
+            </if>
+            <if test="videoUrl != null ">
+                video_url = #{videoUrl, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
 </mapper>

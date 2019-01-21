@@ -18,30 +18,13 @@
         <div class="course-info">
             <div class="course-title">${(course.name)!}</div>
             <div class="course-meta">
-              <#if curCourseSection??>
-                   <a href="/course/video/${curCourseSection.id}" class="learn-btn" >继续学习</a>
+                <#if curCourseSection??>
+                   <a href="/course/video/${(curCourseSection.id)!}" class="learn-btn" >继续学习</a>
                     <div class="static-item"  >
                         <div class="meta">上次学到</div>
-                        <div class="meta-value" title="${(curCourseSection.name)}">${curCourseSection.name}</div>
+                        <div class="meta-value" title="${(curCourseSection.name)!}">${(curCourseSection.name)!}</div>
                     </div>
-              <#else>
-                      <#if chapterSection??>
-                      <#list chapterSection as item>
-                       <#if item.sections??>
-                        <#list item.sections as section>
-                       <#assign javaC1 = section[0] />
-                      <a href="/course/video/${javaC1.id}" class="learn-btn" >开始学习</a>
-                      <div class="static-item"  >
-                        <div class="meta"></div>
-                        <div class="meta-value"></div>
-                      </div>
-                        </#list>
-                       </#if>
-                      </#list>
-                      </#if>
-              </#if>
-
-
+                </#if>
                 <div class="static-item"  >
                     <div class="meta">学习人数</div>
                     <div class="meta-value">${(course.studyCount)!}</div>

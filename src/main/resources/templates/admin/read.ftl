@@ -61,7 +61,7 @@
 									<td style="width:120px;">
 										<p>推荐权重：${course.weight!}</p> 
 										<p><a href="javascript:void(0)" onclick="toEdit(${course.id!})">修改信息</a></p>
-										<p><a href="/admin/courseAppend?courseId=${course.id!}" >添加章节</a></p>
+										<p><a href="javascript:void(0)" onclick="toAdd(${course.id!})">添加章</a></p>
 									</td>
 							</tr>
 						</tbody>
@@ -209,6 +209,43 @@
 		</div>
 	</div>
 	<!-- 课程信息弹出层 -end -->
+
+    <!-- 课程信息章添加 -start -->
+    <div class="modal" id="courseModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal_wapper">
+            <div class="modal-dialog w-8" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" >添加课程章信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" id="courseSectionForm" method="post" action="/admin/addCourseSection">
+                            <input type="hidden" id="courseId" name="courseId" value=""/>
+                            <div class="form-group clearfix">
+                                <label class="control-label" >章节名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="请输入章节名称">
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- tip提示-start -->
+                        <div id="_ocAlertTip" class="alert alert-success f-16" style="display: none;"></div>
+                        <!-- tip提示-end -->
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="doSaveCourse();">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 课程信息章添加 -end -->
 	
 	<!-- 弹出层 alert 信息 -->  
     <div class="modal" id="_ocDialogModal" tabindex="-1" aria-hidden="true">
@@ -259,7 +296,7 @@
 			if(type == 1){
 				elId = 'qa';
 			}
-			var url = '/courseComment/pagelist';
+			var url = '/admin/courseCommentList';
 			$("#" + elId).load(
 				url,
 				{'courseId':courseId,'type':type,'pageNum':1},
@@ -284,6 +321,25 @@
 			    }
 			});
 		}
+
+        //添加课程章
+        function toAdd(id){
+            $.ajax({
+                url:'/admin/courseSectionGetById',
+                type:'POST',
+                dataType:'json',
+                data:{"id":id},
+                success:function(resp){
+                    var errcode = resp.errcode;
+                    if(errcode == 0){
+                        Modal.show('courseModal');
+                        var id = resp.data.id;
+                        $('#courseId').val(id);
+                    }
+                }
+            });
+
+        }
 		
 		//选择图片 
 		function doUpload(){
@@ -303,7 +359,7 @@
 			}
 		}
 		
-		//保存
+		//保存修改
 		function doSave(){
 			$('#courseForm').ajaxSubmit({
 				datatype : 'json',
@@ -319,6 +375,24 @@
 				}
 			});
 		}
+
+
+        //保存章
+        function doSaveCourse(){
+            $('#courseSectionForm').ajaxSubmit({
+                datatype : 'json',
+                success : function(resp) {
+                    var resp = $.parseJSON(resp);
+                    if (resp.errcode == 0) {
+                        window.location.reload();
+                    } else {
+                        alert('添加失败！');
+                    }
+                },
+                error : function(xhr) {
+                }
+            });
+        }
 		
 	</script>
 </body>

@@ -80,9 +80,6 @@
 						<input style="margin-top:5px;" type="button" onclick="saveCourseSection();" class="search-btn" value="保存章节信息" >
 					</li>
 					<li>
-						<input style="margin-top:5px;" type="button" onclick="importCourseSection();" class="search-btn" value="导入章节" >
-					</li>
-					<li>
 						<div  id="sectionTipsAlert"  style="display:none;float:left;margin-left:50px;margin-top:10px;height:30px;color:red;">
 							<span id="sectionTipsAlert_msg" class="color-oc f-14"></span>
 						</div>
@@ -129,39 +126,7 @@
 	<!-- 添加章节 demo div  end -->
 	
 	<!-- 导入章节弹出层 -start -->
-	<div class="modal" id="courseSectionModal" tabindex="-1" role="dialog"  aria-hidden="true">
-		<div class="modal_wapper">
-			<div class="modal-dialog w-8" >
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title" >导入章节</h4>
-					</div>
-					
-					<div class="modal-body">
-						<form role="form" id="importCourseSectionForm" method="post" action="/admin/courseSectionDoImport"  enctype="multipart/form-data">
-							<div class="form-group clearfix"> 
-								<label class="control-label" style="width:150px;" >请选择文件(.xlsx) <span id="imgErrSpan" style="color:red;font-weight:normal;"></span> </label> 
-								<div class="col-sm-8">
-										<input type="file" id="courseSectionExcel" name="courseSectionExcel"  onchange="fileChange();">
-								</div>
-							</div>
-						</form>
-						<!-- tip提示-start -->
-						<div id="_ocAlertTip" class="alert alert-success f-16" style="display: none;">请选择 .xlsx 格式的文件</div>
-						<!-- tip提示-end -->
-					</div>
-					
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" onclick="doImport();">导入</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<!-- 导入章节弹出层 -end -->
 		
 	<!-- 弹出层 alert 信息 -->  
@@ -257,7 +222,7 @@
 			}
 			//JSON.stringify(batchSections);
 			$.ajax({
-				url:'/courseSection/batchAdd',
+				url:'/courseSectionBatchAdd',
 			    type:'POST',
 			    contentType: "application/json",
 			    dataType:'json',
@@ -272,49 +237,7 @@
 			});
 		}
 		
-		//导入章节
-		function importCourseSection(){
-			var courseId = $('#courseId').val();
-			if(courseId == ''){
-				$("#sectionTipsAlert").show().fadeOut(3000);//显示模态框
-				$("#sectionTipsAlert_msg").html('请先保存课程基本信息');
-				return;
-			}
-			Modal.show('courseSectionModal');
-		}
-		
-		//文件验证
-		function fileChange(){
-			var excelFile = $('#courseSectionExcel').val();
-			if(oc.excelValid(excelFile)){
-				return true;
-			}else{
-				$('#_ocAlertTip').show();
-				return false;
-			}
-		}
-		
-		//导入文件
-		function doImport(){
-			if(fileChange()){//验证文件类型 
-				var courseId = $('#courseId').val();
-				$('#importCourseSectionForm').ajaxSubmit({
-					datatype : 'json',
-					data:{"courseId":courseId},
-					success : function(resp) {
-						var resp = $.parseJSON(resp);
-						if (resp.errcode == 0) {
-							//保存成功，跳转到详情页
-				    		window.location.href='/admin/courseRead?id=' + courseId;
-						} else {
-							alert('保存失败');
-						}
-					},
-					error : function(xhr) {
-					}
-				});
-			}
-		}
+
 		
 	</script>
 </body>

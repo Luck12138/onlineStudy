@@ -8,6 +8,11 @@
         update_user, del, id
     </sql>
 
+    <delete id="deleteById" parameterType="com.amaker.online.model.CourseComment">
+        DELETE FROM t_course_comment
+        WHERE id=#{id}
+    </delete>
+
     <insert id="addComment" parameterType="com.amaker.online.model.CourseComment">
         INSERT INTO t_course_comment
         <trim prefix="(" suffix=")"  suffixOverrides="," >

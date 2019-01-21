@@ -55,4 +55,16 @@ public class CourseSectionService {
     public CourseSection selectSectionById(Long id){
         return sectionDao.selectSectionById(id);
     }
+
+    public void addCourseSection(CourseSection courseSection){
+        sectionDao.createCourseSection(courseSection);
+    }
+
+    public void updateCourseSection(CourseSection courseSection){
+        sectionDao.updateCourseSection(courseSection);
+    }
+
+    public void deleteCourseSection(CourseSection courseSection){
+        sectionDao.deleteCourseSection(courseSection);
+    }
 }

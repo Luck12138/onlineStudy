@@ -17,4 +17,8 @@ public interface CourseSectionDao {
     List<CourseSection> selectAllSection(CourseSection courseSection);
 
     CourseSection selectSectionById(Long id);
+
+    void createCourseSection(CourseSection courseSection);
+    void updateCourseSection(CourseSection courseSection);
+    void deleteCourseSection(CourseSection courseSection);
 }

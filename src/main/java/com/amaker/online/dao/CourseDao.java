@@ -37,4 +37,8 @@ public interface CourseDao {
     void updateCourse(Course course);
 
     void deleteCourse(Course course);
+
+    void updateAllCourse(Course course);
+
+    void createCourse(Course course);
 }

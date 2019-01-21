@@ -33,4 +33,8 @@ public class CourseCommentService {
     public void addComment(CourseComment courseComment){
         commentDao.addComment(courseComment);
     }
+
+    public void deleteComment(CourseComment courseComment){
+        commentDao.deleteById(courseComment);
+    }
 }

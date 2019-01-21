@@ -39,7 +39,7 @@
                 	<input type="hidden" id="sortDirection" name="sortDirection" value="${page.sortDirection!'DESC'}" />
                 	<input type="text" class="search-text" name="name" value="${(course.name)!}"  style="margin-top:5px;" placeholder="请输入课程名称">
                 	<input type="submit" class="search-btn" value="搜索" />
-                	<input type="button" class="search-btn" onclick="window.location.href='/course/add'" value=" + 添加课程 " />
+                	<input type="button" class="search-btn" onclick="window.location.href='/admin/courseAdd'" value=" + 添加课程 " />
                 </div>
 			</div>
 			

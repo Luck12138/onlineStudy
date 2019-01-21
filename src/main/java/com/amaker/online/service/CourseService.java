@@ -64,4 +64,12 @@ public class CourseService {
     public void deleteCourse(Course course){
         courseDao.deleteCourse(course);
     }
+
+    public void updateAllCourse(Course course){
+        courseDao.updateAllCourse(course);
+    }
+
+    public void addAllCourse(Course course){
+        courseDao.createCourse(course);
+    }
 }
