@@ -13,7 +13,7 @@
         <where>
             del=0
             <if test="courseId !=null">
-             AND   course_id=#{courseId}
+             AND  course_id=#{courseId}
             </if>
             <if test="onsale !=null">
               AND  onsale=#{onsale}

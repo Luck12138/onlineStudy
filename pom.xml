@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.amaker</groupId>
     <artifactId>onlinestudy</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>onlinestudy</name>
     <description>Demo project for Spring Boot</description>
@@ -79,6 +80,11 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
         <dependency>

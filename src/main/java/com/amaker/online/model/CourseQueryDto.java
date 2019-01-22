@@ -1,7 +1,7 @@
 package com.amaker.online.model;
 
 
-import com.amaker.online.common.util.BeanUtil;
+import com.amaker.online.common.page.BeanUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**

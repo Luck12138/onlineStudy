@@ -8,8 +8,6 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.amaker.online.common.util.BeanUtil;
-
 public abstract class AbstractPage<E> implements Page<E> {
 
 	public static final int DEFAULT_FIRST_PAGE_NUM = 1;

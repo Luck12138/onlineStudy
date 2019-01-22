@@ -33,11 +33,11 @@ public class CrudTest {
     /**
      * 测试创建用户
      */
-    @Test
+//    @Test
     public void createUser(){
         logger.info("------------------ create  start ");
         AuthUser authUser=new AuthUser();
-        authUser.setUsername("tset");
+        authUser.setUsername("tseet");
         authUser.setPassword("test123");
         authUser.setRealname("test张三");
         authUserService.addUser(authUser);
@@ -64,7 +64,7 @@ public class CrudTest {
     @Test
     public void update(){
         logger.info("------------------ create  start ");
-        AuthUser authUser = authUserService.selectUserById(32);
+        AuthUser authUser = authUserService.selectUserById(33);
         authUser.setRealname("testzhangsan");
         authUserService.updateUserById(authUser);
         System.out.println("realname:"+authUser.getRealname());
