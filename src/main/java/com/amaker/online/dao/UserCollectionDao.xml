@@ -33,6 +33,7 @@
         FROM t_user_collections c, t_course s
         WHERE c.object_id=s.id
         AND c.classify=1
+        AND c.user_id=#{param1.userId}
         ORDER BY id DESC
         LIMIT #{param2.startIndex},#{param2.pageSize}
     </select>

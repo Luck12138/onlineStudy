@@ -11,6 +11,18 @@
         del, id
     </sql>
 
+    <select id="selectRegisterCount" parameterType="com.amaker.online.model.RegisterCountDto" resultType="com.amaker.online.model.RegisterCountDto">
+        SELECT count(id) totalCount , date_format(update_time,'%Y-%m-%d') as dateStr
+        FROM t_auth_user
+        WHERE
+        <![CDATA[
+			 UPDATE_TIME >= #{startDate}
+			AND UPDATE_TIME <= #{endDate}
+		]]>
+        GROUP BY date_format(update_time,'%Y-%m-%d')
+        ORDER BY update_time
+    </select>
+
     <update id="updateSelectivity" parameterType="com.amaker.online.model.AuthUser">
         UPDATE t_auth_user
         <trim prefix="SET" suffixOverrides="," >

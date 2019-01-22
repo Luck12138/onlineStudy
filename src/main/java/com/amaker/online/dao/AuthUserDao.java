@@ -2,6 +2,7 @@ package com.amaker.online.dao;
 
 import com.amaker.online.common.page.TailPage;
 import com.amaker.online.model.AuthUser;
+import com.amaker.online.model.RegisterCountDto;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,8 @@ public interface AuthUserDao {
      List<AuthUser> selectUserByPage(AuthUser authUser,TailPage<AuthUser> page);
 
      int getCountByUser(AuthUser authUser);
+
+     List<RegisterCountDto> selectRegisterCount(RegisterCountDto registerCountDto);
 
 
 

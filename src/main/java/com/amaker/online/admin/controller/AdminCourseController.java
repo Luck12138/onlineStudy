@@ -1,16 +1,17 @@
 package com.amaker.online.admin.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.amaker.online.bussiness.ConstsClassifyBussiness;
 import com.amaker.online.common.page.TailPage;
 import com.amaker.online.common.storage.QiniuStorage;
+import com.amaker.online.common.util.CalendarUtil;
+import com.amaker.online.common.util.JsonUtil;
 import com.amaker.online.common.web.JsonView;
-import com.amaker.online.model.ConstsClassify;
-import com.amaker.online.model.ConstsClassifyVO;
-import com.amaker.online.model.Course;
-import com.amaker.online.model.CourseSectionVO;
+import com.amaker.online.model.*;
 import com.amaker.online.service.ConstsClassifyService;
 import com.amaker.online.service.CourseSectionService;
 import com.amaker.online.service.CourseService;
+import com.amaker.online.service.StudyCountService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +49,9 @@ public class AdminCourseController {
 
     @Autowired
     private ConstsClassifyService constsClassifyService;
+
+    @Autowired
+    private StudyCountService studyCountService;
 
     @RequestMapping("/coursePageList")
     public String course(Course course, TailPage<Course> page, Model model){
@@ -77,7 +82,7 @@ public class AdminCourseController {
 
 
     @RequestMapping("/courseRead")
-    public String courseRead(Long id,Model model){
+    public String courseRead(Long id,Model model) throws IOException {
         //课程详情
         Course course = courseService.getById(id);
         if(course==null){
@@ -97,6 +102,16 @@ public class AdminCourseController {
         List<ConstsClassify> subClassify=new ArrayList<>();
         for(ConstsClassifyVO vo:map.values()){
             subClassify.addAll(vo.getSubClassifyList());
+        }
+        //获取报表统计信息
+        CourseStudyStaticsDto staticsDto = new CourseStudyStaticsDto();
+        staticsDto.setCourseId(course.getId());
+        staticsDto.setEndDate(new Date());
+        staticsDto.setStartDate(CalendarUtil.getPreNDay(new Date(), 7));
+
+        StaticsVO staticsVo = studyCountService.queryCourseStudyStatistics(staticsDto);
+        if(null != staticsVo){
+            model.addAttribute("staticsVo",JsonUtil.toJson(staticsVo));
         }
         model.addAttribute("subClassify",subClassify);
         model.addAttribute("classify",classify);
