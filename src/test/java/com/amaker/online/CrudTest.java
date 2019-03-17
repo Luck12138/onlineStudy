@@ -4,8 +4,11 @@ import com.amaker.online.common.page.TailPage;
 import com.amaker.online.common.storage.QiniuStorage;
 import com.amaker.online.common.storage.ThumbModel;
 import com.amaker.online.common.util.CommonUtil;
+import com.amaker.online.dao.ExamDao;
 import com.amaker.online.model.AuthUser;
+import com.amaker.online.model.Exam;
 import com.amaker.online.service.AuthUserService;
+import com.amaker.online.service.ExamService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +26,12 @@ public class CrudTest {
 
     @Autowired
     private AuthUserService authUserService;
+
+    @Autowired
+    private ExamDao examDao;
+
+    @Autowired
+    private ExamService examService;
 
     public static Logger logger=LoggerFactory.getLogger(CrudTest.class);
 
@@ -115,6 +125,21 @@ public class CrudTest {
         //测试下载不同大小的图片
         url = QiniuStorage.getUrl(key,ThumbModel.THUMB_256);
         System.out.println("url = " + url);
+    }
+
+    @Test
+    public void test(){
+
+        Exam exam=new Exam();
+
+        int totalItemsCount = examDao.getTotalItemsCount(exam);
+        System.out.println("totalItemsCount = " + totalItemsCount);
+        TailPage<Exam> page=new TailPage<>();
+
+        List<Exam> exams = examDao.selectExamListPage(exam, page);
+        for(Exam exam1:exams){
+            System.out.println("exam :"+exam1.getName());
+        }
     }
 }
 

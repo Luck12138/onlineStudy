@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.ExamDao">
+
+    <sql id="All_Columns">
+        name, brief, picture, create_time, create_user, update_time,
+        update_user, del, id
+    </sql>
+
+    <select id="selectExamListPage" resultType="com.amaker.online.model.Exam">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_exam
+        <where>
+            <if test="param1.name != null">
+               name like CONCAT('%',#{param1.name},'%' )
+            </if>
+        </where>
+
+        <if test="param2.sortField != null and param2.sortField != '' ">
+            ORDER BY ${param2.sortField} ${param2.sortDirection}
+        </if>
+
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+
+    </select>
+
+
+
+    <select id="getTotalItemsCount" parameterType="com.amaker.online.model.Exam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_exam
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            AND del = 0
+            <if test="name != null">
+                AND name like CONCAT('%',#{name},'%' )
+            </if>
+        </trim>
+    </select>
+</mapper>
