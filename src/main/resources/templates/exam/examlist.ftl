@@ -119,8 +119,8 @@
                 <div>
                     <#list page.items as item>
                         <#assign n = item_index + 1 />
-                        <a href="/exam/learn/${item.id}" target="_blank">
-                            <div class="course-card-container"  <#if n %5 == 0>style="margin-right: 0px;" </#if> >
+                        <a href="/exam/problemList/${item.id}" target="_blank">
+                            <div class="course-card-container" <#if n %5 == 0>style="margin-right: 0px;" </#if> >
                                 <#if n %5 == 0>
                                 <div class="course-card-top green-bg">
                                     <#elseif n %4 == 0>
@@ -134,10 +134,13 @@
                                                     </#if>
                                                     <span>${item.name!}</span>
                                                 </div>
-                                                <div class="course-card-content">
-                                                    <h3 class="course-card-name" title="${item.name!}">${item.name!}</h3>
-                                                    <p  class="course-card-brief" title="${item.brief!}">${item.brief!}</p>
-                                                    </div>
+                                                <div class="course-card-content" style="padding-left: 0px; height: 125px">
+                                                    <#if item.picture?? && item.picture != ''>
+                                                        <img class="lecturer-uimg" src="${item.picture}" style="height: 120px;width: 224px;padding-left: 0px" >
+                                                    <#else>
+                                                        <img class="lecturer-uimg" src="/res/i/header.jpg" style="height: 120px;width: 224px;padding-left: 0px">
+                                                    </#if>
+                                                    <p  class="course-card-brief" style="padding-left: 5px" title="${item.brief!}">*${item.brief!}</p>
                                                 </div>
                                             </div>
                         </a>

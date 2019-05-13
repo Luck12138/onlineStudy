@@ -41,4 +41,29 @@ public class ExamService {
         page.setItems(exams);
         return page;
     }
+
+    public List<Exam> selectExamList(Exam exam){
+        return examDao.selectExamList(exam);
+    }
+
+    public void addExam(Exam exam){
+        examDao.addExam(exam);
+    }
+
+    public Exam getExamById(int id){
+        Exam examById = examDao.getExamById(id);
+        prepareCoursePicture(examById);
+        return examById;
+    }
+
+    public void deleteExamById(int id){
+        examDao.deleteExamById(id);
+    }
+
+
+    public void updateAllExam(Exam exam){
+        examDao.updateAllExam(exam);
+    }
 }
+
+

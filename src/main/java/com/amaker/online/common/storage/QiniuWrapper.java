@@ -21,11 +21,11 @@ public class QiniuWrapper {
 	
 	private static final Logger logger = LoggerFactory.getLogger(QiniuWrapper.class);
 	
-	private static final String CONFIG_BUCKET="onlinestudy1";
+	private static final String CONFIG_BUCKET="onlinestudy3";
 	
 	private static final String CONFIG_AK="XK_8ziYSRZUDFQaATIenQVuwTdhzY6AKc6OjRseh";
 	private static final String CONFIG_SK="rbW3_Yt6UBTkcPF0jjkEbz2TjfuAkkTrfXKhi3bR";
-	private static final String CONFIG_CDN="pohl6fuxh.bkt.clouddn.com";
+	private static final String CONFIG_CDN="prf79s93f.bkt.clouddn.com";
 	
 	private static final Auth auth;
 	private static final UploadManager uploadManager;

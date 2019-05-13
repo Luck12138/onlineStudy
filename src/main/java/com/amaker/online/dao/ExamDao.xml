@@ -26,6 +26,73 @@
     </select>
 
 
+    <select id="selectExamList" parameterType="com.amaker.online.model.Exam" resultType="com.amaker.online.model.Exam">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_exam
+        <where>
+            <if test="name != null">
+                name like CONCAT('%',#{name},'%' )
+            </if>
+        </where>
+    </select>
+
+    <insert id="addExam" parameterType="com.amaker.online.model.Exam">
+        INSERT INTO t_exam
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                name,
+            </if>
+            <if test="picture != null ">
+                picture,
+            </if>
+            <if test="brief != null ">
+                brief,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                #{name},
+            </if>
+            <if test="picture != null ">
+               #{picture},
+            </if>
+            <if test="brief != null ">
+               #{brief},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
 
     <select id="getTotalItemsCount" parameterType="com.amaker.online.model.Exam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_exam
@@ -36,4 +103,48 @@
             </if>
         </trim>
     </select>
+
+
+    <select id="getExamById" parameterType="java.lang.Integer" resultType="com.amaker.online.model.Exam">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM t_exam
+        WHERE id=#{id}
+    </select>
+
+    <delete id="deleteExamById" parameterType="java.lang.Integer">
+        DELETE from t_exam
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateAllExam" parameterType="com.amaker.online.model.Exam">
+        UPDATE t_exam
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+                name=#{name},
+            </if>
+            <if test="picture != null ">
+                picture=#{picture},
+            </if>
+            <if test="brief != null ">
+                brief=#{brief},
+            </if>
+            <if test="createTime != null ">
+                create_time=#{createTime},
+            </if>
+            <if test="createUser != null ">
+                create_user=#{createUser},
+            </if>
+            <if test="updateTime != null ">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser != null ">
+                update_user=#{updateTime},
+            </if>
+            <if test="del != null ">
+                del=#{del}
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
 </mapper>

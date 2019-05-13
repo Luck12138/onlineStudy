@@ -17,5 +17,15 @@ public interface ExamDao {
     //查询exam列表
     List<Exam> selectExamListPage(Exam exam, TailPage<Exam> page);
 
+    List<Exam> selectExamList(Exam exam);
+
     int getTotalItemsCount(Exam exam);
+
+    void addExam(Exam exam);
+
+    Exam getExamById(int id);
+
+    void deleteExamById(int id);
+
+    void updateAllExam(Exam exam);
 }

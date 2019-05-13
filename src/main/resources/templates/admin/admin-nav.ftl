@@ -16,6 +16,9 @@
         <li <#if curNav?? && curNav =="classify">class="active"</#if>>
             <a href="/admin/classifyIndex">课程分类管理</a>
         </li>
+        <li <#if curNav?? && curNav =="exam">class="active"</#if>>
+            <a href="/admin/examIndex">题库管理</a>
+        </li>
         <li <#if curNav?? && curNav =="user">class="active"</#if>>
             <a href="/admin/userPageList">用户管理</a>
         </li>
