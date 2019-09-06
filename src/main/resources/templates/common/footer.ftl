@@ -3,7 +3,7 @@
 	<div class="f-footer-box clearfix">
 		<div class="footer-link">
 			<a href="javascript:void(0);"  target="_blank" title="项目介绍">在线教学系统主要用于辅助课程教学和学习</a>
-			<a href="javascript:void(0);" target="_blank" title="联系我们">邮箱:1623082663@qq.com</a>
+			<a href="javascript:void(0);" target="_blank" title="联系我们">邮箱:xxx@qq.com</a>
 
 		</div>
 		

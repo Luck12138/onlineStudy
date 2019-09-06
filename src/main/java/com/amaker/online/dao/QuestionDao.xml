@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amaker.online.dao.QuestionDao">
+
+    <select id="selectQuestionList" parameterType="com.amaker.online.model.Question" resultType="com.amaker.online.model.Question">
+        SELECT
+        *
+        FROM t_exam_question
+        <where>
+            <if test="subjectId!=null">
+                subject_id =#{subjectId}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="selectQuestionByContestId" parameterType="com.amaker.online.model.Question" resultType="com.amaker.online.model.Question">
+        SELECT
+        *
+        FROM t_exam_question
+        <where>
+
+            <if test="contestId!=null">
+                contest_id =#{contestId}
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="selectQuestionById" parameterType="java.lang.Integer" resultType="com.amaker.online.model.Question">
+        SELECT
+        *
+        FROM t_exam_question
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="queryQuestionList" resultType="com.amaker.online.model.Question">
+        SELECT
+        *
+        FROM t_exam_question
+    </select>
+
+    <insert id="addQuestion" parameterType="com.amaker.online.model.Question">
+        INSERT INTO t_exam_question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title!=null">
+                title,
+            </if>
+            <if test="content!=null">
+                content,
+            </if>
+            <if test="questionType!=null">
+                question_type,
+            </if>
+            <if test="optionA!=null">
+                option_a,
+            </if>
+            <if test="optionB!=null">
+                option_b,
+            </if>
+            <if test="optionC!=null">
+                option_c,
+            </if>
+            <if test="optionD!=null">
+                option_d,
+            </if>
+            <if test="answer!=null">
+                answer,
+            </if>
+            <if test="parse!=null">
+                parse,
+            </if>
+            <if test="score!=null">
+                score,
+            </if>
+            <if test="subjectId!=null">
+                subject_id,
+            </if>
+            <if test="contestId != null ">
+                contest_id,
+            </if>
+            <if test="createTime!=null">
+                create_time,
+            </if>
+            <if test="updateTime!=null">
+                update_time,
+            </if>
+            <if test="difficulty!=null">
+                difficulty
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title!=null">
+                #{title},
+            </if>
+            <if test="content!=null">
+                #{content},
+            </if>
+            <if test="questionType!=null">
+                #{questionType},
+            </if>
+            <if test="optionA!=null">
+                #{optionA},
+            </if>
+            <if test="optionB!=null">
+                #{optionB},
+            </if>
+            <if test="optionC!=null">
+                #{optionC},
+            </if>
+            <if test="optionD!=null">
+               #{optionD},
+            </if>
+            <if test="answer!=null">
+                #{answer},
+            </if>
+            <if test="parse!=null">
+               #{parse},
+            </if>
+            <if test="score!=null">
+                #{score},
+            </if>
+            <if test="subjectId!=null">
+                #{subjectId},
+            </if>
+            <if test="contestId!=null">
+                #{contestId},
+            </if>
+            <if test="createTime!=null">
+                #{createTime},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime},
+            </if>
+            <if test="difficulty!=null">
+                #{difficulty}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateQuestion" parameterType="com.amaker.online.model.Question">
+        UPDATE t_exam_question
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title!=null">
+               title=#{title},
+            </if>
+            <if test="content!=null">
+                content=#{content},
+            </if>
+            <if test="questionType!=null">
+                question_type=#{questionType},
+            </if>
+            <if test="optionA!=null">
+                option_a=#{optionA},
+            </if>
+            <if test="optionB!=null">
+                option_b=#{optionB},
+            </if>
+            <if test="optionC!=null">
+                option_c=#{optionC},
+            </if>
+            <if test="optionD!=null">
+                option_d=#{optionD},
+            </if>
+            <if test="answer!=null">
+                answer=#{answer},
+            </if>
+            <if test="parse!=null">
+                parse=#{parse},
+            </if>
+            <if test="subjectId!=null">
+                subject_id=#{subjectId},
+            </if>
+            <if test="createTime!=null">
+                createTime=#{createTime},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="difficulty!=null">
+                difficulty=#{difficulty}
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM t_exam_question
+        WHERE id=#{id}
+    </delete>
+
+
+    <select id="selectContestListPage" resultType="com.amaker.online.model.Question">
+        SELECT *
+        FROM t_exam_question
+
+        <where>
+            <if test="param1.contestId != null">
+                contest_id =#{param1.contestId}
+            </if>
+        </where>
+
+
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+
+    </select>
+
+
+    <select id="selectContestList" parameterType="com.amaker.online.model.Question" resultType="com.amaker.online.model.Question">
+        SELECT  *
+        FROM t_exam_question
+    </select>
+
+
+    <select id="getTotalQuestionCount" parameterType="com.amaker.online.model.Question" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_exam_question
+
+        <where>
+            <if test="contestId != null">
+                contest_id =#{contestId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

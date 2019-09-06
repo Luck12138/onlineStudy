@@ -7,8 +7,10 @@ import com.amaker.online.common.util.CommonUtil;
 import com.amaker.online.dao.ExamDao;
 import com.amaker.online.model.AuthUser;
 import com.amaker.online.model.Exam;
+import com.amaker.online.model.Question;
 import com.amaker.online.service.AuthUserService;
 import com.amaker.online.service.ExamService;
+import com.amaker.online.service.ProblemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,10 +35,22 @@ public class CrudTest {
     @Autowired
     private ExamService examService;
 
+    @Autowired
+    private ProblemService problemService;
+
     public static Logger logger=LoggerFactory.getLogger(CrudTest.class);
 
     @Test
     public void contextLoads() {
+
+        Question question=new Question();
+        question.setContestId(8);
+        System.out.println("111");
+        List<Question> questionList = problemService.selectQuestionByContestId(question);
+        System.out.println("222");
+        for(Question question1:questionList){
+            System.out.println("---------"+question1.getScore()+"-------");
+        }
 
     }
 

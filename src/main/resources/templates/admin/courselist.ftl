@@ -71,7 +71,7 @@
 									<td>
 										<p>${item.time!}</p>
 										<p style="color: red;">
-											<#if item.free == 1>免费<#else>￥${item.price!}</#if>
+
 										</p>
 										<p>
 										<#if item.level == 1>

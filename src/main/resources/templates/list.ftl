@@ -215,7 +215,7 @@
                                     </div>
                                 <#else>
 									<div class="course-card-info">${item.studyCount!}人在学</div>
-									<div class="course-card-price">￥${item.price!}</div>
+
                                 </#if>
 							</div>
 						</div>

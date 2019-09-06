@@ -40,7 +40,7 @@
 								<td>
 										<p>${course.time!}</p>
 										<p style="color: red;">
-											<#if course.free == 1>免费<#else>￥${course.price!}</#if>
+
 										</p>
 										<p>
 										<#if course.level == 1>

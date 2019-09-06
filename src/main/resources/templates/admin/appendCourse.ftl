@@ -125,10 +125,7 @@
 	</div>
 	<!-- 添加章节 demo div  end -->
 	
-	<!-- 导入章节弹出层 -start -->
 
-	<!-- 导入章节弹出层 -end -->
-		
 	<!-- 弹出层 alert 信息 -->  
     <div class="modal" id="_ocDialogModal" tabindex="-1" aria-hidden="true">
 		<div class="modal_wapper small">

@@ -47,9 +47,6 @@
 								<thead>
 									<tr>
 										<th>姓名</th>
-										<th>登录名</th>
-										<th>学历</th>
-										<th>学校</th>
 										<th>手机</th>
 										<th>状态</th>
 										<th>性别</th>
@@ -62,9 +59,6 @@
 									<#list page.items as item>
 									<tr>
 										<td>${item.realname!}</td>
-										<td>${item.username!}</td>
-										<td>${item.education!}</td>
-										<td>${item.collegeName!}</td>
 										<td>${item.mobile!}</td>
 										<td>
 											<#if item.status == 2>
